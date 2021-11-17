@@ -1,0 +1,3 @@
+Company 1|This is my message|30
+Company 2|company 2 message ~~|50
+Company 3|company 3 message!!|40
