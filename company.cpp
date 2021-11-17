@@ -13,11 +13,9 @@ Company::Company(string name, string message, int bid):
 string Company::encodeToSerial() {
     int name_len = name.length();
     int message_len = message.length();
-    return std::to_string(name_len) + "|" + 
-        std::to_string(message_len) + "|" + 
-        this->name + "|" + 
+    return this->name + "|" + 
         this->message + "|" + 
-        std::to_string(this->exposure);
+        std::to_string(this->exposure) + "|";
 }
 
 // using std::cerr;
