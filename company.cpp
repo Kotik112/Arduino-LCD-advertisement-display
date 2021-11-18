@@ -50,8 +50,7 @@ int io_get_int_input(const char* text) {
         std::cout << "ERROR" << std::endl;
     }
     else if (std::cin.get() == '\n') {
-
-    std::cout<<"ENTER WAS PRESSED"<<std::endl;
+        std::cout<<"ENTER WAS PRESSED"<<std::endl;
     }
 
 
@@ -77,4 +76,3 @@ bool Company::writeToFile()
       std::cout << "Name: " << this->name << std::endl;
       std::cout << "Msg: " << this->message << std::endl;
       std::cout << "Exposure: " << this->exposure << std::endl;
-  }

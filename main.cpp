@@ -43,9 +43,13 @@ int main(int argc, char** argv) {
 
     // Read file
     am.readFile();
+
+
     
     Company company = get_company_input();
     company.printCompany();
+
+    
     
     return 0;
 }

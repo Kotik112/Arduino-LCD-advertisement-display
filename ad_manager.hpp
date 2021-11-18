@@ -28,7 +28,6 @@ class AdManager {
     void sendAdsToSerial();
     void readFile();
     vector<string> splitString(string text, string delimiter);
-
 };
 
 

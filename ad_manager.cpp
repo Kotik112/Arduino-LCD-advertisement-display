@@ -101,6 +101,3 @@ vector<string> AdManager::splitString(string text, string delimiter) {
 
     return parts;
 }
-
-
-
