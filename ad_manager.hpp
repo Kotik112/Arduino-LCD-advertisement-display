@@ -1,10 +1,12 @@
 
-#ifndef AD_MANAGER 
-#define AD_MANAGER
+#ifndef __AD_MANAGER_H__ 
+#define __AD_MANAGER_H__
 
 #include <iostream>
 #include <vector>
 #include "company.hpp"
+
+#define MAX_TIME 60
 
 using std::vector;
 using std::string;
@@ -28,10 +30,6 @@ class AdManager {
     vector<string> splitString(string text, string delimiter);
 
 };
-
-
-
-
 
 
 #endif
