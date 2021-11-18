@@ -1,10 +1,11 @@
-#include "ad_manager.hpp"
+
 #include <algorithm>
 #include <fstream>
 #include <sstream>
 #include "serial.h"
+#include "ad_manager.hpp"
 
-AdManager::AdManager(vector<std::string> serialPorts): fullAdTime(60), serialPorts(serialPorts)
+AdManager::AdManager(vector<std::string> serialPorts): fullAdTime(MAX_TIME), serialPorts(serialPorts)
 {}
 
 void AdManager::calculateAdTime() {
@@ -46,7 +47,7 @@ void AdManager::sendAdsToSerial() {
         if(SerialIsConnected(port)) {
 
             // Shuffle the ads 
-            std::random_shuffle(this->companyAds.begin(), this->companyAds.end());
+            //std::random_shuffle(this->companyAds.begin(), this->companyAds.end());
 
             // Write ad info to to port
             for (auto company: this->companyAds) {
