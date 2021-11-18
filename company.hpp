@@ -1,11 +1,11 @@
 #ifndef __COMPANY_H__
 #define __COMPANY_H__
 
-#include <iostream>
-#include <vector>
+
 #include <string>
 
-using std::vector;
+
+
 using std::string;
 
 struct Company {
@@ -19,6 +19,10 @@ struct Company {
 
     //Encodes a 'Company' object to a string
     string encodeToSerial();
+
 };
+
+string io_get_string_input(const char* text);
+int io_get_int_input(const char* text);
 
 #endif

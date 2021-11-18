@@ -86,14 +86,14 @@ vector<string> AdManager::splitString(string text, string delimiter) {
     size_t start = 0;
     size_t end = 0;
     // std::cout << "looking for:" << delimiter << " in:" << text << std::endl;
-    std::cout << "Text is " << text.length()  << " long and delimiter is: " << delimiter.length() << " long." << std::endl;
+    //std::cout << "Text is " << text.length()  << " long and delimiter is: " << delimiter.length() << " long." << std::endl;
     while((end = text.find(delimiter, start)) != std::string::npos) {
-        std::cout << "Positions are start: " << start << " end: "<< end << std::endl;
+        //std::cout << "Positions are start: " << start << " end: "<< end << std::endl;
         // std::cout << "Found pos:" << end << std::endl;
         size_t length = end - start;
         parts.push_back(text.substr(start, length));
         start = end + delimiter.length();
-        std::cout << "Next start pos is: " << start << std::endl;
+        //std::cout << "Next start pos is: " << start << std::endl;
     }
     start = end + delimiter.length();
     size_t length = text.length() - start;
