@@ -15,6 +15,27 @@ string Company::encodeToSerial() {
     return this->name + "|" + this->message + "|" + std::to_string(this->exposure) + "|";
 }
 
+bool Company::writeToFile()
+  {
+    std::ofstream outputFile;
+    outputFile.open("ads.txt", std::ios::app);
+    if (outputFile.is_open()) {
+      outputFile << this->name << "|" << this->message << "|" << this->bid<< "|" << std::endl;
+      outputFile.close();
+      return true;
+    }
+    else {
+      std::cerr << "Could not open file to save \n";
+      return false;
+    }
+  }
+
+  void Company::printCompany() {
+      std::cout << "Name: " << this->name << std::endl;
+      std::cout << "Msg: " << this->message << std::endl;
+      std::cout << "Bid: " << this->bid << std::endl;
+  }
+
 string io_get_string_input(const char* text) {
 
     string io_get_string;
@@ -50,29 +71,10 @@ int io_get_int_input(const char* text) {
         std::cout << "ERROR" << std::endl;
     }
     else if (std::cin.get() == '\n') {
-        std::cout<<"ENTER WAS PRESSED"<<std::endl;
+
+    std::cout<<"ENTER WAS PRESSED"<<std::endl;
     }
 
 
     return io_get_int;
 }
-
-bool Company::writeToFile()
-  {
-    std::ofstream outputFile;
-    outputFile.open("ads.txt", std::ios::app);
-    if (outputFile.is_open()) {
-      outputFile << this->name << "|" << this->message << "|" << this->bid<< "|" << std::endl;
-      outputFile.close();
-      return true;
-    }
-    else {
-      std::cerr << "Could not open file to save \n";
-      return false;
-    }
-  }
-
-  void Company::printCompany() {
-      std::cout << "Name: " << this->name << std::endl;
-      std::cout << "Msg: " << this->message << std::endl;
-      std::cout << "Exposure: " << this->exposure << std::endl;
