@@ -18,7 +18,7 @@ SERIALPORT SerialInit(char* portName)
 		}
 		else
 		{
-			printf("ERROR!!!");
+			printf("ERROR!!! %ld ", GetLastError());
 		}
 	}
 	else {
@@ -27,6 +27,7 @@ SERIALPORT SerialInit(char* portName)
 		if (!GetCommState(port.handler, &dcbSerialParameters)) {
 			printf("failed to get current serial parameters");
 		}
+		
 		else {
 			dcbSerialParameters.BaudRate = CBR_9600;
 			dcbSerialParameters.ByteSize = 8;

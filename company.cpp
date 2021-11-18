@@ -42,7 +42,7 @@ string io_get_string_input(const char* text) {
     std::cout << text << std::endl;
     std::cin >> io_get_string;
 
-    if (io_get_string.length() < 0x41 || io_get_string.length() > 0x7E ) {
+    if (io_get_string.length() < 60 || io_get_string.length() > 126 ) {
 
         std::cout << "Error " << std::endl;
 

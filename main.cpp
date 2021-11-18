@@ -39,6 +39,9 @@ int main(int argc, char** argv) {
             return -1;
         }
     }
+    /* for (auto port: ports){
+        cout << port << endl;
+    } */
 
     // Create ad manager and send in ports
     auto am = AdManager(ports);
@@ -47,18 +50,21 @@ int main(int argc, char** argv) {
     am.readFile();
     am.print_string_vector(); //Funkar ej
     
-    Company company = get_company_input();
-    company.printCompany();
-    string my_string = "TEST STRING";
-    my_string = company.encodeToSerial();
-    auto port = SerialInit((char *) ports[0].c_str());
+    //Company company = get_company_input();
+    //company.printCompany();
+    
+    const char* my_string = "1234\0";
+
+    SERIALPORT port = SerialInit((char *) ports[0].c_str());
     if (SerialIsConnected(port)) {
         cout << "Connected.\n";
-        SerialWritePort(port, (char*) my_string.c_str(), my_string.length());
+        SerialWritePort(port, (char*) my_string, sizeof(char)*5);
+        SerialClose(port);
     }
     else {
         cerr << "Not connected.\n";
     }
+
     
     return 0;
 }
