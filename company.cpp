@@ -1,5 +1,4 @@
 #include "company.hpp"
-#include "io_functions.hpp"
 #include <iostream>
 
 //Constructor
@@ -58,3 +57,16 @@ int io_get_int_input(const char* text) {
 
     return io_get_int;
 }
+
+void Company::writeToFile()
+  {
+    std::ofstream outputFile;
+    outputFile.open("ads.txt", std::ios::app);
+    if (outputFile.is_open()) {
+      outputFile << this->name << "|" << this->message << "|" << this->bid<< "|" << std::endl;
+      outputFile.close();
+    }
+    else {
+      std::cerr << "Could not open file to save \n";
+    }
+  }
