@@ -58,15 +58,17 @@ int io_get_int_input(const char* text) {
     return io_get_int;
 }
 
-void Company::writeToFile()
+bool Company::writeToFile()
   {
     std::ofstream outputFile;
     outputFile.open("ads.txt", std::ios::app);
     if (outputFile.is_open()) {
       outputFile << this->name << "|" << this->message << "|" << this->bid<< "|" << std::endl;
       outputFile.close();
+      return true;
     }
     else {
       std::cerr << "Could not open file to save \n";
+      return false;
     }
   }
