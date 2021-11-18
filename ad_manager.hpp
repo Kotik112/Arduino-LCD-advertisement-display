@@ -28,6 +28,7 @@ class AdManager {
     void sendAdsToSerial();
     void readFile();
     vector<string> splitString(string text, string delimiter);
+    void print_string_vector();
 };
 
 

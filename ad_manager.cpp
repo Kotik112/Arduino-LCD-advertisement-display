@@ -56,6 +56,9 @@ void AdManager::sendAdsToSerial() {
             }
             SerialClose(port);
         }
+        else {
+            std::cerr << "Not connected.\n";
+        }
     }
 
 
@@ -77,7 +80,6 @@ void AdManager::readFile() {
     // split to parts
     for (auto ad_text: lines) {
         auto ad_parts = this->splitString(ad_text, "|");
-
     }
 }
 
@@ -100,4 +102,11 @@ vector<string> AdManager::splitString(string text, string delimiter) {
     parts.push_back(text.substr(start, length));
 
     return parts;
+}
+
+void AdManager::print_string_vector() {
+    for (auto company: this->companyAds) {
+        std::cout << "TEST\n";
+        company.printCompany();
+    }
 }

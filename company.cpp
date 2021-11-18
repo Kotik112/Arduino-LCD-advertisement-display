@@ -72,7 +72,7 @@ int io_get_int_input(const char* text) {
     }
     else if (std::cin.get() == '\n') {
 
-    std::cout<<"ENTER WAS PRESSED"<<std::endl;
+    std::cout << "ENTER WAS PRESSED" << std::endl;
     }
 
 

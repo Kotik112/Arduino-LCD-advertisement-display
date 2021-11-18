@@ -4,6 +4,8 @@
 #include <stdbool.h> // Behövs detta i c++ ens?
 #include "ad_manager.hpp"
 
+#include "serial.h"
+
 using namespace std;
 
 Company get_company_input(void) {
@@ -26,7 +28,7 @@ int main(int argc, char** argv) {
 
     for (int i = 1; i < argc; i++) {
         // check argv[i]
-        std::string portName(argv[i]);
+        string portName(argv[i]);
 
         // Test each arg to ensure it matches "COM*"
         if (portName == "COM1" || portName == "COM2" || portName == "COM3" || portName == "COM4" || portName == "COM5") {
@@ -43,13 +45,20 @@ int main(int argc, char** argv) {
 
     // Read file
     am.readFile();
-
-
+    am.print_string_vector(); //Funkar ej
     
     Company company = get_company_input();
     company.printCompany();
-
-    
+    string my_string = "TEST STRING";
+    my_string = company.encodeToSerial();
+    auto port = SerialInit((char *) ports[0].c_str());
+    if (SerialIsConnected(port)) {
+        cout << "Connected.\n";
+        SerialWritePort(port, (char*) my_string.c_str(), my_string.length());
+    }
+    else {
+        cerr << "Not connected.\n";
+    }
     
     return 0;
 }
