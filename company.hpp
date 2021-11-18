@@ -3,7 +3,7 @@
 
 
 #include <string>
-
+#include <fstream>
 
 
 using std::string;
@@ -19,6 +19,13 @@ struct Company {
 
     //Encodes a 'Company' object to a string
     string encodeToSerial();
+    void writeToFile()
+  {
+    std::ofstream outputFile;
+    outputFile.open("ads.txt", std::ios::app);
+    outputFile << name << "|" << message << "|" << bid<< "|" << endl;
+    outputFile.close();
+  }
 
 };
 
