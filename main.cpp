@@ -6,6 +6,15 @@
 
 using namespace std;
 
+Company get_company_input(void) {
+    string name = io_get_string_input("Enter company name: ");
+    string message = io_get_string_input("Enter company message: ");
+    int bid = io_get_int_input("Enter your bid for the advertisement: ");
+
+    Company new_company = Company(name, message, bid);
+    return new_company;
+}
+
 int main(int argc, char** argv) {
     if (argc < 2) {
         cerr << "Error. You must specify the port number." << endl;
@@ -34,6 +43,9 @@ int main(int argc, char** argv) {
 
     // Read file
     am.readFile();
+    
+    Company company = get_company_input();
+    company.printCompany();
     
     return 0;
 }

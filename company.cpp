@@ -72,3 +72,9 @@ bool Company::writeToFile()
       return false;
     }
   }
+
+  void Company::printCompany() {
+      std::cout << "Name: " << this->name << std::endl;
+      std::cout << "Msg: " << this->message << std::endl;
+      std::cout << "Exposure: " << this->exposure << std::endl;
+  }

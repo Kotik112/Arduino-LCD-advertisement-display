@@ -20,6 +20,7 @@ struct Company {
     //Encodes a 'Company' object to a string
     string encodeToSerial();
     bool writeToFile();
+    void printCompany();
 
 };
 
