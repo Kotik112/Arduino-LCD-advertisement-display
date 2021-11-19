@@ -23,6 +23,7 @@ bool Company::writeToFile()
     std::ofstream outputFile;
     outputFile.open("ads.txt", std::ios::app);
     if (outputFile.is_open()) {
+      cout << "OPENED FILE\n";
       outputFile << this->name << "|" << this->message << "|" << this->bid<< "|" << std::endl;
       outputFile.close();
       return true;
@@ -45,13 +46,9 @@ string io_get_string_input(const char* text) {
     cout << text << std::endl;
     cin >> io_get_string;
 
-    if (io_get_string.length() < 60 || io_get_string.length() > 126 ) {
+    if (io_get_string.length() < 1 || io_get_string.length() > 100 ) {
       cout << "Error " << std::endl;
       return "";
-    }
-
-    else if (cin.get() == '\n') {
-      cout<<"ENTER WAS PRESSED"<<std::endl;
     }
     
     return io_get_string;
@@ -70,8 +67,6 @@ int io_get_int_input(const char* text) {
     else if(io_get_int <= 0) {
       cout << "ERROR" << std::endl;
     }
-    else if (cin.get() == '\n') {
-      cout << "ENTER WAS PRESSED" << std::endl;
-    }
+
     return io_get_int;
 }
