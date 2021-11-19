@@ -46,12 +46,15 @@ int men_get_int_input(const char* text) {
       cout << "No text allowed." << endl;
       return -1;
     }
-    else if(io_get_int <= 0) {
+    else if(io_get_int < 0) {
       cout << "ERROR" << endl;
+      return -1;
     }
 
     return io_get_int;
 }
+
+
 
 int men_entry_choice(const char* text) {
 
