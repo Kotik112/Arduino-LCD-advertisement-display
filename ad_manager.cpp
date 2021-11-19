@@ -76,6 +76,7 @@ void AdManager::readFile() {
     if (fp.is_open()) {
         if (!fp) {
         cout << "No such file";
+        }
     }
     else {
         char ch;
