@@ -5,6 +5,8 @@
 #include "serial.h"
 #include "ad_manager.hpp"
 
+using namespace std;
+
 AdManager::AdManager(vector<std::string> serialPorts): 
 fullAdTime(MAX_TIME), 
 serialPorts(serialPorts)
@@ -67,11 +69,25 @@ void AdManager::sendAdsToSerial() {
 }
 
 void AdManager::readFile() {
+    
     // read file to stringsteam
     std::stringstream ss;
-    std::ifstream fp ("ads.txt");
+    std::fstream fp ("ads.txt", ios::in);
     if (fp.is_open()) {
-        ss << fp.rdbuf();
+        if (!fp) {
+        cout << "No such file";
+    }
+    else {
+        char ch;
+
+        while (1) {
+            fp >> ch;
+            if (fp.eof())
+                break;
+
+            cout << ch;
+        }
+
     }
     fp.close();
     string file_contents = ss.str();
