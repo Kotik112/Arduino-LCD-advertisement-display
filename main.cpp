@@ -3,8 +3,6 @@
 
  */
 
-
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -14,8 +12,6 @@
 #include "serial.h"
 
 using namespace std;
-
-
 
 int main(int argc, char** argv) {
     if (argc < 2) {
@@ -46,22 +42,17 @@ int main(int argc, char** argv) {
     // Create ad manager and send in ports
     auto am = AdManager(ports);
 
+    men_entry(am);
+
     // Read file
     am.readFile();
-    auto test_ad = Company("Danial", "LGG", 10000000);
+
+
+/*     auto test_ad = Company("Danial", "LGG", 10000000);
     auto test_ad1 = Company("Google1", "Googolplex1", 1500);
     am.addCompany(test_ad);
     am.addCompany(test_ad1);
-    am.sendAdsToSerial();
-
-    //for (auto company: am.)
-
-/*     test_ad.writeToFile();
-    string my_string = io_get_string_input("Enter your string: ");
-    cout << my_string << endl;
-
-    int my_int = io_get_int_input("Enter your int: ");
-    cout << my_int << endl; */
+    am.sendAdsToSerial(); */
 
     
     return 0;

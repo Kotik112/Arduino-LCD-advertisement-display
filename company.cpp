@@ -9,17 +9,15 @@ Company::Company(string name, string message, int bid):
     name(name), 
     message(message), 
     bid(bid), 
-    exposure(0) 
-    {} 
+    exposure(0) {} 
 
 string Company::encodeToSerial() {
-    int name_len = name.length();
-    int message_len = message.length();
+/*     int name_len = name.length();
+    int message_len = message.length(); */
     return this->name + "|" + this->message + "|" + std::to_string(this->exposure) + "|";
 }
 
-bool Company::writeToFile()
-  {
+bool Company::writeToFile() {
     std::ofstream outputFile;
     outputFile.open("ads.txt", std::ios::app);
     if (outputFile.is_open()) {
@@ -36,7 +34,7 @@ bool Company::writeToFile()
 
   void Company::printCompany() {
       cout << "Name: " << this->name << std::endl;
-      cout << "Msg: " << this->message << std::endl;
+      cout << "Message: " << this->message << std::endl;
       cout << "Bid: " << this->bid << std::endl;
   }
 

@@ -123,9 +123,8 @@ vector<string> AdManager::splitString(string text, string delimiter) {
     return parts;
 }
 
-void AdManager::print_string_vector() {
+void AdManager::print_string_vector() {  //Remove later.
     for (auto company: this->companyAds) {
         std::cout << "TESTING!\n";
-        this->companyAds;
     }
 }

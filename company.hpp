@@ -24,7 +24,5 @@ struct Company {
 
 };
 
-string io_get_string_input(const char* text);
-int io_get_int_input(const char* text);
 
 #endif
