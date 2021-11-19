@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
 
     // Read file
     am.readFile();
-    auto test_ad = Company("Google", "Googolplex", 3000);
+    auto test_ad = Company("Danial", "LGG", 10000000);
     auto test_ad1 = Company("Google1", "Googolplex1", 1500);
     am.addCompany(test_ad);
     am.addCompany(test_ad1);

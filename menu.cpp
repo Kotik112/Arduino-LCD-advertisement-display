@@ -7,7 +7,11 @@
 #include "menu.hpp"
 
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
+
 
 Company get_company_input(void) {
     string name = io_get_string_input("Enter company name: ");
@@ -18,87 +22,131 @@ Company get_company_input(void) {
     return new_company;
 }
 
-string io_get_string_input(const char* text) {
+static string men_get_string_input(const char* text) {
 
     string io_get_string;
-    cout << text << std::endl;
+    cout << text << endl;
     cin >> io_get_string;
 
     if (io_get_string.length() < 1 || io_get_string.length() > 100 ) {
-      cout << "Error " << std::endl;
+      cout << "Error " << endl;
       return "";
     }
     
     return io_get_string;
 }
 
-int io_get_int_input(const char* text) {
+int men_get_int_input(const char* text) {
     unsigned int io_get_int;
 
-    cout << text << std::endl;
+    cout << text << endl;
     cin >> io_get_int;
 
     if (!cin) {
-      cout << "No text allowed." << std::endl;
+      cout << "No text allowed." << endl;
       return -1;
     }
     else if(io_get_int <= 0) {
-      cout << "ERROR" << std::endl;
+      cout << "ERROR" << endl;
     }
 
     return io_get_int;
 }
 
-int men_entry_choice(void) {
+int men_entry_choice(const char* text) {
 
-	int choice;
-	std::cout << "\nchoose entry: ";
-	std::cin >> choice;
-	if (choice < SET || choice > EXT) {
-		std::cout << "not an option. try again." << endl;
-		return men_entry();
+	int choice, temp;
+	cout << text;
+	cin >> temp;
+
+    //adjust the -1 offset from enum.
+    temp--; 
+
+	if (temp < ADD || temp > EXT) {
+		cout << "not an option. try again." << endl;
+		return -1;
 	}
-	return choice;
+    else {
+        choice = temp;
+        return choice;
+    }
+	return -1;
 }
 
-int men_entry(AdManager am){
+void men_flush_file(const char* text) {
+    std::ofstream ofs;
+    ofs.open("ads.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
+}
 
-std::cout << "#############################" << endl;
-std::cout << "####### MAIN MENU ###########" << endl;
-std::cout << "#     SELECT OPTION BELOW   #" << endl;
-std::cout << "#     1. ADD                #" << endl;
-std::cout << "#     2. RUN ADS            #" << endl;
-std::cout << "#     3. EXIT               #" << endl;
-std::cout << "#############################" << endl;
-    int staged = 0;
-    while(1) {
-        int choice = men_entry();
-        switch(choice) {
-            case SET:
-                if (staged == 1) {
-                    // ropar på company_input() func och tar emot den i company var.
-                    auto company = get_company_input();
-                    //ropar på addCompany metoden för att push_back company i vector<company>.
-                    am.addCompany(company);
-                    company.printCompany();
-                    staged = 1;
-                } else {
-                    std::cout << "You've staged all companies" << endl;
+void men_print_menu(void) {
+    cout << "#############################" << endl;
+    cout << "####### MAIN MENU ###########" << endl;
+    cout << "#                           #" << endl;
+    cout << "#    SELECT OPTION BELOW    #" << endl;
+    cout << "#   1. Add Adversistment    #" << endl;
+    cout << "#   2. Export Ads           #" << endl;
+    cout << "#   3. Flush file           #" << endl;
+    cout << "#   4. Exit                 #" << endl;
+    cout << "#                           #" << endl;
+    cout << "#############################" << endl;
+}
+
+int men_entry(AdManager am) {
+
+    men_print_menu();
+
+    int choice = -1; //-1 så att den inte hoppar in i switchen.
+    choice = men_get_int_input("Enter your choice (1 - 3)\n");
+    
+    if (choice == -1) { std::cerr << "mem_get_int_input() failed!\n"; }
+
+    int staged = 0, ad_count = 0;
+    bool stay_in_loop = true;
+    auto company;
+
+    while(stay_in_loop) {
+
+        if (ad_count <= 5) { choice = RUN; }
+
+        switch(choice) 
+        {
+            case ADD:   //Add new company to the company vector.
+                                    //rätt comparison?
+                if (ad_count <= 5) {
+                    std::cout << "Maximum 5 number of Ads per 60 sec slot.\n";
+                    break;
                 }
+
+                else{
+                    company = get_company_input();
+                }
+                    
+                
+
+                company.printCompany();//Kommentera bort det här sen.
+                am.addCompany(company);
+                ad_count++;
+                //staged = 1;
+                
                 break;
-            case RUN:
-                if (staged == 2) {
-                    cout << "This is where we put function to run the shit" << endl;
-                    std::cout << "RUNNING THE SHOW" << endl;
-                    return 0;            
-                } else {
-                    std::cout << "Please declare messages and companies first" << endl;
-                    break;                
-                }
+
+            case RUN: //Send company vector to Serial COM
+
+                am.sendAdsToSerial();    
+                break;
+
+            case DEL:  //Flushes ads.txt
+
+                men_flush_file("ads.txt");
+                break;
+
             case EXT:
+
                 std::cout << "Good Bye" << endl;
-                exit(0);
+                stay_in_loop = false;
                 return 0;
+
             default:
                 std::cout << "Try again." << endl;                   
         }
