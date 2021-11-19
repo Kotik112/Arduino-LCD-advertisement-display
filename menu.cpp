@@ -95,7 +95,7 @@ void men_print_menu(void) {
     cout << "#                           #" << endl;
     cout << "#    SELECT OPTION BELOW    #" << endl;
     cout << "#   1. Add Adversistment    #" << endl;
-    cout << "#   2. Export Ads           #" << endl;
+    cout << "#   2. Export Ads to Ardu   #" << endl;
     cout << "#   3. Flush file           #" << endl;
     cout << "#   4. Exit                 #" << endl;
     cout << "#                           #" << endl;
@@ -115,9 +115,12 @@ int men_entry(AdManager am) {
     
 
     while(stay_in_loop) {
+<<<<<<< HEAD
 
         if (ad_count >= 5) { choice = RUN; }
 
+=======
+>>>>>>> 0b2e456ea6ca1952310e0a0d2da6d8f3a753c3fb
         men_print_menu();
         choice = men_get_int_input("Enter your choice (1 - 3)");
         choice--;
