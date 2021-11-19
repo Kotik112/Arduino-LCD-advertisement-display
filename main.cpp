@@ -61,6 +61,8 @@ int main(int argc, char** argv) {
     am.addCompany(test_ad1);
     am.sendAdsToSerial();
 
+    //for (auto company: am.)
+
 /*     test_ad.writeToFile();
     string my_string = io_get_string_input("Enter your string: ");
     cout << my_string << endl;
