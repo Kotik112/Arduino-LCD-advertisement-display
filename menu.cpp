@@ -80,6 +80,7 @@ std::cout << "#############################" << endl;
                     auto company = get_company_input();
                     //ropar på addCompany metoden för att push_back company i vector<company>.
                     am.addCompany(company);
+                    company.printCompany();
                     staged = 1;
                 } else {
                     std::cout << "You've staged all companies" << endl;
