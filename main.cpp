@@ -48,22 +48,11 @@ int main(int argc, char** argv) {
 
     // Read file
     am.readFile();
-    am.print_string_vector(); //Funkar ej
-    
-    //Company company = get_company_input();
-    //company.printCompany();
-    
-    const char* my_string = "1234\0";
-
-    SERIALPORT port = SerialInit((char *) ports[0].c_str());
-    if (SerialIsConnected(port)) {
-        cout << "Connected.\n";
-        SerialWritePort(port, (char*) my_string, sizeof(char)*5);
-        SerialClose(port);
-    }
-    else {
-        cerr << "Not connected.\n";
-    }
+    auto test_ad = Company("Google", "Googolplex", 3000);
+    auto test_ad1 = Company("Google1", "Googolplex1", 1500);
+    am.addCompany(test_ad);
+    am.addCompany(test_ad1);
+    am.sendAdsToSerial();
 
     
     return 0;

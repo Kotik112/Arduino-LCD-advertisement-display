@@ -5,7 +5,9 @@
 #include "serial.h"
 #include "ad_manager.hpp"
 
-AdManager::AdManager(vector<std::string> serialPorts): fullAdTime(MAX_TIME), serialPorts(serialPorts)
+AdManager::AdManager(vector<std::string> serialPorts): 
+fullAdTime(MAX_TIME), 
+serialPorts(serialPorts)
 {}
 
 void AdManager::calculateAdTime() {
@@ -45,7 +47,7 @@ void AdManager::sendAdsToSerial() {
 
         // Check if it's connected
         if(SerialIsConnected(port)) {
-
+            std::cout << "Connected!\n";
             // Shuffle the ads 
             //std::random_shuffle(this->companyAds.begin(), this->companyAds.end());
 
@@ -106,7 +108,7 @@ vector<string> AdManager::splitString(string text, string delimiter) {
 
 void AdManager::print_string_vector() {
     for (auto company: this->companyAds) {
-        std::cout << "TEST\n";
+        std::cout << "TEST1\n";
         company.printCompany();
     }
 }

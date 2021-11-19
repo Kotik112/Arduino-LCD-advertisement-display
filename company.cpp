@@ -1,6 +1,9 @@
 #include "company.hpp"
 #include <iostream>
 
+using std::cout;
+using std::cin;
+
 //Constructor
 Company::Company(string name, string message, int bid): 
     name(name), 
@@ -31,50 +34,44 @@ bool Company::writeToFile()
   }
 
   void Company::printCompany() {
-      std::cout << "Name: " << this->name << std::endl;
-      std::cout << "Msg: " << this->message << std::endl;
-      std::cout << "Bid: " << this->bid << std::endl;
+      cout << "Name: " << this->name << std::endl;
+      cout << "Msg: " << this->message << std::endl;
+      cout << "Bid: " << this->bid << std::endl;
   }
 
 string io_get_string_input(const char* text) {
 
     string io_get_string;
-    std::cout << text << std::endl;
-    std::cin >> io_get_string;
+    cout << text << std::endl;
+    cin >> io_get_string;
 
     if (io_get_string.length() < 60 || io_get_string.length() > 126 ) {
-
-        std::cout << "Error " << std::endl;
-
-        return "";
-    }
-    else if (std::cin.get() == '\n') {
-
-    std::cout<<"ENTER WAS PRESSED"<<std::endl;
+      cout << "Error " << std::endl;
+      return "";
     }
 
+    else if (cin.get() == '\n') {
+      cout<<"ENTER WAS PRESSED"<<std::endl;
+    }
+    
     return io_get_string;
- }
+}
 
 int io_get_int_input(const char* text) {
-
     unsigned int io_get_int;
 
-    std::cout << text << std::endl;
-    std::cin >> io_get_int;
+    cout << text << std::endl;
+    cin >> io_get_int;
 
-    if (!std::cin) {
-        std::cout << "No text allowed." << std::endl;
-        return -1;
+    if (!cin) {
+      cout << "No text allowed." << std::endl;
+      return -1;
     }
     else if(io_get_int <= 0) {
-        std::cout << "ERROR" << std::endl;
+      cout << "ERROR" << std::endl;
     }
-    else if (std::cin.get() == '\n') {
-
-    std::cout << "ENTER WAS PRESSED" << std::endl;
+    else if (cin.get() == '\n') {
+      cout << "ENTER WAS PRESSED" << std::endl;
     }
-
-
     return io_get_int;
 }
