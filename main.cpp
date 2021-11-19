@@ -10,19 +10,12 @@
 #include <vector>
 #include <stdbool.h> // Behövs detta i c++ ens?
 #include "ad_manager.hpp"
-
+#include "menu.hpp"
 #include "serial.h"
 
 using namespace std;
 
-Company get_company_input(void) {
-    string name = io_get_string_input("Enter company name: ");
-    string message = io_get_string_input("Enter company message: ");
-    int bid = io_get_int_input("Enter your bid for the advertisement: ");
 
-    Company new_company = Company(name, message, bid);
-    return new_company;
-}
 
 int main(int argc, char** argv) {
     if (argc < 2) {

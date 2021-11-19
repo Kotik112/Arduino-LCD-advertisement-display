@@ -14,7 +14,9 @@ typedef enum main_menu {
 	SET, RUN, EXT
 } main_menu;
 
-
+Company get_company_input(void);
+string io_get_string_input(const char* text);
+int io_get_int_input(const char* text);
 int men_entry_choice(void);
 int men_entry(void);
 
