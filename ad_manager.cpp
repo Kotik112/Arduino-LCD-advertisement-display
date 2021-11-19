@@ -101,7 +101,7 @@ void AdManager::readFile() {
     auto lines = this->splitString(file_contents, "\n");
 
     // split to parts
-    for (auto ad_text: lines) {
+    for (auto ad_text : lines) {
         auto ad_parts = this->splitString(ad_text, "|");
     }
 }

@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 #include "company.hpp"
 #include "serial.h"
 #include "ad_manager.hpp"
 #include "menu.hpp"
+
 
 
 using std::cout;
@@ -14,6 +16,7 @@ using std::string;
 
 
 Company get_company_input(void) {
+ 
     string name = men_get_string_input("Enter company name: ");
     string message = men_get_string_input("Enter company message: ");
     int bid = men_get_int_input("Enter your bid for the advertisement: ");
@@ -26,7 +29,9 @@ string men_get_string_input(const char* text) {
 
     string io_get_string;
     cout << text << endl;
-    cin >> io_get_string;
+    cin.ignore();
+    getline(cin, io_get_string);
+    
 
     if (io_get_string.length() < 1 || io_get_string.length() > 100 ) {
         std::cerr << "Error " << endl;
@@ -34,6 +39,7 @@ string men_get_string_input(const char* text) {
     }
     
     return io_get_string;
+    return 0;
 }
 
 int men_get_int_input(const char* text) {
@@ -52,6 +58,7 @@ int men_get_int_input(const char* text) {
     }
 
     return io_get_int;
+    return 0;
 }
 
 
@@ -97,18 +104,24 @@ void men_print_menu(void) {
 
 int men_entry(AdManager am) {
 
+    
+
+    int choice = -1; //-1 så att den inte hoppar in i switchen.
+
+    if (choice == -1) { std::cerr << "mem_get_int_input() failed!\n"; }
+
     int ad_count = 0;
     bool stay_in_loop = true;
     
+
     while(stay_in_loop) {
 
-        
+        if (ad_count >= 5) { choice = RUN; }
 
         men_print_menu();
-        int choice = men_get_int_input("Enter your choice (1 - 3)");
-        if (choice == -1) { std::cerr << "mem_get_int_input() failed!\n"; }
+        choice = men_get_int_input("Enter your choice (1 - 3)");
         choice--;
-        if (ad_count >= 5) { choice = RUN; }
+
         switch(choice) 
         {
             case ADD:   //Add new company to the company vector.
@@ -119,8 +132,10 @@ int men_entry(AdManager am) {
                 }
 
                 else {
+
                     auto company = get_company_input();
                     company.printCompany(); //Kommentera bort det här sen.
+                    company.writeToFile();
                     am.addCompany(company);
                     ad_count++;
                 }
