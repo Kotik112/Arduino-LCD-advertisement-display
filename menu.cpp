@@ -82,7 +82,7 @@ std::cout << "#############################" << endl;
                     am.addCompany(company);
                     staged = 1;
                 } else {
-                    std::cout << "\nyou've staged all companies. let's run the ads!" << endl;
+                    std::cout << "You've staged all companies" << endl;
                 }
                 break;
             case RUN:
