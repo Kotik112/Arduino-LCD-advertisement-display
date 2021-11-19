@@ -12,7 +12,7 @@ struct Company {
     string name;
     string message;
     int bid;
-    float exposure;
+    int exposure;
 
     //Constructor
     Company(string name, string message, int bid);

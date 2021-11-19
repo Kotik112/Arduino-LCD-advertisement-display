@@ -94,24 +94,18 @@ void men_print_menu(void) {
 
 int men_entry(AdManager am) {
 
-    
-
-    int choice = -1; //-1 så att den inte hoppar in i switchen.
-
-    if (choice == -1) { std::cerr << "mem_get_int_input() failed!\n"; }
-
     int ad_count = 0;
     bool stay_in_loop = true;
     
-
     while(stay_in_loop) {
 
-        if (ad_count >= 5) { choice = RUN; }
+        
 
         men_print_menu();
-        choice = men_get_int_input("Enter your choice (1 - 3)");
+        int choice = men_get_int_input("Enter your choice (1 - 3)");
+        if (choice == -1) { std::cerr << "mem_get_int_input() failed!\n"; }
         choice--;
-
+        if (ad_count >= 5) { choice = RUN; }
         switch(choice) 
         {
             case ADD:   //Add new company to the company vector.

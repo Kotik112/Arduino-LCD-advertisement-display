@@ -14,7 +14,7 @@ serialPorts(serialPorts)
 
 void AdManager::calculateAdTime() {
     // Add up up all bids to a total
-    float totalTime = 0;
+    int totalTime = 0;
 
     for (auto company: this->companyAds) {
         totalTime += company.bid;
@@ -50,8 +50,12 @@ void AdManager::sendAdsToSerial() {
         // Check if it's connected
         if(SerialIsConnected(port)) {
             std::cout << "Connected!\n";
-            // Shuffle the ads 
-            //std::random_shuffle(this->companyAds.begin(), this->companyAds.end());
+            // Shuffle the ads
+            int size = this->companyAds.size();
+            for (int i = 0; i < size - 1; i++) {
+                int j = i + rand() % (size - i);
+                swap(this->companyAds[i], this->companyAds[j]);
+            } 
 
             // Write ad info to to port
             for (auto company: this->companyAds) {
@@ -123,8 +127,3 @@ vector<string> AdManager::splitString(string text, string delimiter) {
     return parts;
 }
 
-void AdManager::print_string_vector() {  //Remove later.
-    for (auto company: this->companyAds) {
-        std::cout << "TESTING!\n";
-    }
-}
