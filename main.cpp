@@ -1,3 +1,10 @@
+/* TODO:
+    - Int input får inte vara minus. (company.cpp)
+
+ */
+
+
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -54,8 +61,16 @@ int main(int argc, char** argv) {
     am.addCompany(test_ad1);
     am.sendAdsToSerial();
 
+/*     test_ad.writeToFile();
+    string my_string = io_get_string_input("Enter your string: ");
+    cout << my_string << endl;
+
+    int my_int = io_get_int_input("Enter your int: ");
+    cout << my_int << endl; */
+
     
     return 0;
 }
+
 
 
