@@ -1,2 +1,3 @@
 asdf|sdd|500|
 asdf|sdf|300|
+Kotik|rman|1500|
