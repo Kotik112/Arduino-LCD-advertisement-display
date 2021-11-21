@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include "serial.h"
+#include "company.hpp"
 #include "ad_manager.hpp"
 
 AdManager::AdManager(vector<std::string> serialPorts): 
@@ -50,11 +51,7 @@ void AdManager::sendAdsToSerial() {
         if(SerialIsConnected(port)) {
             std::cout << "Connected!\n";
             // Shuffle the ads
-           /*  int size = this->companyAds.size();
-            for (int i = 0; i < size - 1; i++) {
-                int j = i + rand() % (size - i);
-                swap(this->companyAds[i], this->companyAds[j]);
-            }  */
+            //std::shuffle(companyAds.begin(), companyAds.end());
 
             // Write ad info to to port
             for (auto company: this->companyAds) {
@@ -73,26 +70,11 @@ void AdManager::sendAdsToSerial() {
 }
 
 void AdManager::readFile() {
-    
     // read file to stringsteam
     std::stringstream ss;
-    std::fstream fp ("ads.txt", std::ios::in);
+    std::ifstream fp ("ads.txt");
     if (fp.is_open()) {
-        if (!fp) {
-        std::cout << "No such file";
-        }
-    }
-    else {
-        char ch;
-
-        while (1) {
-            fp >> ch;
-            if (fp.eof())
-                break;
-
-            std::cout << ch;
-        }
-
+        ss << fp.rdbuf();
     }
     fp.close();
     string file_contents = ss.str();
@@ -101,20 +83,25 @@ void AdManager::readFile() {
     auto lines = this->splitString(file_contents, "\n");
 
     // split to parts
-    for (auto ad_text : lines) {
+    for (auto ad_text: lines) {
         auto ad_parts = this->splitString(ad_text, "|");
+        string company_name = ad_parts[0];
+        string message = ad_parts[1];
+        int bid = stoi(ad_parts[2]);
+        this->addCompany(Company(company_name, message, bid));
     }
+
 }
 
 vector<string> AdManager::splitString(string text, string delimiter) {
     vector<string> parts;
     size_t start = 0;
     size_t end = 0;
-    // std::cout << "looking for:" << delimiter << " in:" << text << std::endl;
+    //std::cout << "looking for:" << delimiter << " in:" << text << std::endl;
     //std::cout << "Text is " << text.length()  << " long and delimiter is: " << delimiter.length() << " long." << std::endl;
     while((end = text.find(delimiter, start)) != std::string::npos) {
         //std::cout << "Positions are start: " << start << " end: "<< end << std::endl;
-        // std::cout << "Found pos:" << end << std::endl;
+        //std::cout << "Found pos:" << end << std::endl;
         size_t length = end - start;
         parts.push_back(text.substr(start, length));
         start = end + delimiter.length();

@@ -63,8 +63,6 @@ int men_get_int_input(const char* text) {
     return 0;
 }
 
-
-
 int men_entry_choice(const char* text) {
 
 	int choice, temp;

@@ -36,28 +36,10 @@ int main(int argc, char** argv) {
         }
     }
     auto am = AdManager(ports);
-
-    auto c1 = Company("Kotik", "My company is awesome!", 1500);
-    auto c2 = Company("Google", "#testing@special-chars", 2000);
-
-    //Prints out first Test company
-    cout << "Company 1: \n";
-    
-    c1.printCompany();
-
-    am.addCompany(c1);
-    
-    c1.writeToFile();
-    
-
-
-    //Prints out second Test company
-    cout << "Company 2: \n";
-    c2.printCompany();
-
-    am.addCompany(c2);
+    am.readFile();
 
     am.sendAdsToSerial();
+    
 
     
     return 0;
