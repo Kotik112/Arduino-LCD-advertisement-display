@@ -37,8 +37,12 @@ int main(int argc, char** argv) {
     }
     auto am = AdManager(ports);
 
-    auto c1 = Company("Kotik", "My company is awesome!", 1500, "30");
-    auto c2 = Company("Google", "#testing@special-chars", 2000, "30");
+    auto c1 = Company("Unn", "My company is awesome!", 1500, "30");
+    auto c2 = Company("Jakob", "#testing@special-chars", 2000, "30");
+    auto c3 = Company("Arman", "C++ is really hard.", 2000, "30");
+    auto c4 = Company("Google", "><(((*>", 2000, "30");
+    auto c5 = Company("IKEA", "        ", 2000, "30");
+    
 
     //Prints out first Test company
     cout << "Company 1: \n";
@@ -51,11 +55,32 @@ int main(int argc, char** argv) {
     
 
 
-    //Prints out second Test company
+    //Prints out second test company
     cout << "Company 2: \n";
     c2.printCompany();
 
     am.addCompany(c2);
+
+    //Prints out third test company
+    cout << "Company 3: \n";
+    c3.printCompany();
+
+    am.addCompany(c3);
+
+    //Prints out fourth test company
+    cout << "Company 2: \n";
+    c4.printCompany();
+
+    am.addCompany(c4);
+
+    //Prints out fifth test company
+    cout << "Company 2: \n";
+    c5.printCompany();
+
+    am.addCompany(c5);
+
+
+
 
     am.sendAdsToSerial();
 
