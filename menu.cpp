@@ -29,7 +29,7 @@ string men_get_string_input(const char* text) {
 
     string io_get_string;
     cout << text << endl;
-    cin.ignore();
+    cin.ignore(256, '0');
     getline(cin, io_get_string);
     
 
