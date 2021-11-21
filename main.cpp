@@ -54,13 +54,6 @@ int main(int argc, char** argv) {
 
     am.sendAdsToSerial();
 
-
-    int a = 5, b = 2;
-    cout << a/b << endl;
-    float c = a/b;
-    cout << c << endl;
-    cout << round(c) << endl;
-
     
     return 0;
 }

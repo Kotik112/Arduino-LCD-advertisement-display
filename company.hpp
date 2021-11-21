@@ -12,11 +12,12 @@ struct Company {
     string name;
     string message;
     int bid;
-    int exposure;
+    float exposure;
 
     //Constructor
     Company(string name, string message, int bid);
 
+    void set_exposure(float exposure);
     //Encodes a 'Company' object to a string
     string encodeToSerial();
     bool writeToFile();
