@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <ios> 
+#include <limits>
 
 #include "company.hpp"
 #include "serial.h"
@@ -28,8 +30,6 @@ Company get_company_input(void) {
 string men_get_string_input(const char* text) {
 
     string io_get_string;
-    cout << text << endl;
-    cin.ignore(256, '0');
     getline(cin, io_get_string);
     
 
