@@ -22,7 +22,7 @@ void AdManager::calculateAdTime() {
     // Set exposure to be total secs * bid fraction
     int total = 0;
     for (auto company: this->companyAds) {
-        std::cout << "Company bid: " << company.bid << ". Company name: " << company.name << std::endl;
+        std::cout << "Company bid: " << company.bid << ". Total bids: " << total_bids << std::endl;
         company.exposure = (company.bid / total_bids) * fullAdTime;
         std::cout << "Company exposure: " << company.exposure << std::endl;
         total += company.exposure; 
