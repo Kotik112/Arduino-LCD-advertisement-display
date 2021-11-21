@@ -4,7 +4,7 @@
 
 #define MAX_CMP_NAME 20
 #define MAX_CMP_MESS 100
-#define MAX_CMP_NUM 2
+#define MAX_CMP_NUM 5
 
 typedef struct package_t {
   unsigned int name_size;
