@@ -115,6 +115,9 @@ int men_entry(AdManager am) {
     
 
     while(stay_in_loop) {
+
+        if (ad_count >= 5) { choice = RUN; }
+
         men_print_menu();
         choice = men_get_int_input("Enter your choice (1 - 3)");
         choice--;

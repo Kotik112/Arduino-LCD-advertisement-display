@@ -1,6 +1,2 @@
-unn g|ello there|300|
-second com|umber two|300|
-hej hopp|jolan bolan|3|
-hej hopp|jolan bolan|300|
-hej hopp|jpolan bolan|300|
-hej hopp|jolan bolan|400|
+asdf|sdd|500|
+asdf|sdf|300|
