@@ -2,3 +2,4 @@ asdf|sdd|500|
 asdf|sdf|300|
 Kotik|rman|1500|
 Kotik|My company is awesome!|1500|
+Kotik|My company is awesome!|1500|

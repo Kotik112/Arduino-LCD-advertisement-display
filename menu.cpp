@@ -22,8 +22,9 @@ Company get_company_input(void) {
     string name = men_get_string_input("Enter company name: ");
     string message = men_get_string_input("Enter company message: ");
     int bid = men_get_int_input("Enter your bid for the advertisement: ");
+    string exposure;
 
-    Company new_company = Company(name, message, bid);
+    Company new_company = Company(name, message, bid, exposure);
     return new_company;
 }
 

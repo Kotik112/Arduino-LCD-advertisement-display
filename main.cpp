@@ -37,8 +37,8 @@ int main(int argc, char** argv) {
     }
     auto am = AdManager(ports);
 
-    auto c1 = Company("Kotik", "My company is awesome!", 1500);
-    auto c2 = Company("Google", "#testing@special-chars", 2000);
+    auto c1 = Company("Kotik", "My company is awesome!", 1500, "30");
+    auto c2 = Company("Google", "#testing@special-chars", 2000, "30");
 
     //Prints out first Test company
     cout << "Company 1: \n";

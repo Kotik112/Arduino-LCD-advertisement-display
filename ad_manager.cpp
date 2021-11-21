@@ -27,10 +27,20 @@ void AdManager::calculateAdTime() {
         ". Turns into exposure of: " << ((float)company.bid / (float)total_bids) * (float)fullAdTime << std::endl;
         company.set_exposure(((float)company.bid / (float)total_bids) * (float)fullAdTime);
         std::cout << "Company exposure: " << company.exposure << std::endl;
-        total += company.exposure; 
+        //total += company.exposure; 
     }
     std::cout << "Sum total expsure: " << total << std::endl;
 }
+
+/* int AdManager::setAdTime() {
+    int total_bids = 0;
+    for (auto company: this->companyAds) {
+        total_bids += company.bid;
+        std::cout << "Current total: " << total_bids << std::endl;
+    }
+    
+
+} */
 
 void AdManager::addCompany(Company company) {
     this->companyAds.push_back(company);
