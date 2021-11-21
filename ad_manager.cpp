@@ -5,8 +5,6 @@
 #include "serial.h"
 #include "ad_manager.hpp"
 
-using namespace std;
-
 AdManager::AdManager(vector<std::string> serialPorts): 
 fullAdTime(MAX_TIME), 
 serialPorts(serialPorts)
@@ -14,28 +12,28 @@ serialPorts(serialPorts)
 
 void AdManager::calculateAdTime() {
     // Add up up all bids to a total
-    int totalTime = 0;
-
+    int total_bids = 0;
+    std::cout << "Calculating total time!\n";
     for (auto company: this->companyAds) {
-        totalTime += company.bid;
+        total_bids += company.bid;
+        std::cout << "Current total: " << total_bids << std::endl;
     }
-
+    std::cout << "Sum total bids: " << total_bids << std::endl;
     // Set exposure to be total secs * bid fraction
+    int total = 0;
     for (auto company: this->companyAds) {
-        company.exposure = (company.bid / totalTime) * fullAdTime;
+        std::cout << "Company bid: " << company.bid << ". Company name: " << company.name << std::endl;
+        company.exposure = (company.bid / total_bids) * fullAdTime;
+        std::cout << "Company exposure: " << company.exposure << std::endl;
+        total += company.exposure; 
     }
+    std::cout << "Sum total expsure: " << total << std::endl;
 }
 
 void AdManager::addCompany(Company company) {
     this->companyAds.push_back(company);
+    std::cout << "Added company to vector. \n";
 }
-
-// void AdManager::removeCompany(Company company) {
-//     auto index = std::find(this->companyAds.begin(), this->companyAds.end(), company);
-//     if (index != this->companyAds.end()) {
-//         this->companyAds.erase(index);
-//     }
-// }
 
 void AdManager::sendAdsToSerial() {
     // Calculate time
@@ -46,7 +44,6 @@ void AdManager::sendAdsToSerial() {
 
         // Init the port
         auto port = SerialInit((char*)serialName.c_str());
-
         // Check if it's connected
         if(SerialIsConnected(port)) {
             std::cout << "Connected!\n";
@@ -60,6 +57,7 @@ void AdManager::sendAdsToSerial() {
             // Write ad info to to port
             for (auto company: this->companyAds) {
                 string message = company.encodeToSerial();
+                std::cout << message << std::endl;
                 SerialWritePort(port, (char*) message.c_str(), message.length());
             }
             SerialClose(port);
@@ -76,10 +74,10 @@ void AdManager::readFile() {
     
     // read file to stringsteam
     std::stringstream ss;
-    std::fstream fp ("ads.txt", ios::in);
+    std::fstream fp ("ads.txt", std::ios::in);
     if (fp.is_open()) {
         if (!fp) {
-        cout << "No such file";
+        std::cout << "No such file";
         }
     }
     else {
@@ -90,7 +88,7 @@ void AdManager::readFile() {
             if (fp.eof())
                 break;
 
-            cout << ch;
+            std::cout << ch;
         }
 
     }

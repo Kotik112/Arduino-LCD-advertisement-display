@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <stdbool.h> // Behövs detta i c++ ens?
+#include <cmath>
 #include "ad_manager.hpp"
 #include "menu.hpp"
 #include "serial.h"
@@ -37,9 +37,29 @@ int main(int argc, char** argv) {
     }
     auto am = AdManager(ports);
 
-    men_entry(am);
+    auto c1 = Company("Kotik", "My company is awesome!", 1500);
+    auto c2 = Company("Google", "#testing@special-chars", 2000);
+
+    //Prints out first Test company
+    cout << "Company 1: \n";
+    c1.printCompany();
+
+    am.addCompany(c1);
+
+    //Prints out second Test company
+    cout << "Company 2: \n";
+    c2.printCompany();
+
+    am.addCompany(c2);
+
+    am.sendAdsToSerial();
 
 
+    int a = 5, b = 2;
+    cout << a/b << endl;
+    float c = a/b;
+    cout << c << endl;
+    cout << round(c) << endl;
 
     
     return 0;

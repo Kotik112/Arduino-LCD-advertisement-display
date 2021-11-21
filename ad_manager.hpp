@@ -12,7 +12,6 @@ using std::vector;
 using std::string;
 
 class AdManager {
-
     vector<Company> companyAds;
     vector<string> serialPorts;
     int fullAdTime;
