@@ -41,7 +41,6 @@ string men_get_string_input(const char* text) {
     }
     
     return io_get_string;
-    return 0;
 }
 
 int men_get_int_input(const char* text) {
@@ -60,7 +59,6 @@ int men_get_int_input(const char* text) {
     }
 
     return io_get_int;
-    return 0;
 }
 
 
@@ -109,8 +107,6 @@ int men_entry(AdManager am) {
     
 
     int choice = -1; //-1 så att den inte hoppar in i switchen.
-
-    if (choice == -1) { std::cerr << "mem_get_int_input() failed!\n"; }
 
     int ad_count = 0;
     bool stay_in_loop = true;

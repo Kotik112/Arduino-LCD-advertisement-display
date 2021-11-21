@@ -51,11 +51,11 @@ void AdManager::sendAdsToSerial() {
         if(SerialIsConnected(port)) {
             std::cout << "Connected!\n";
             // Shuffle the ads
-            int size = this->companyAds.size();
+           /*  int size = this->companyAds.size();
             for (int i = 0; i < size - 1; i++) {
                 int j = i + rand() % (size - i);
                 swap(this->companyAds[i], this->companyAds[j]);
-            } 
+            }  */
 
             // Write ad info to to port
             for (auto company: this->companyAds) {

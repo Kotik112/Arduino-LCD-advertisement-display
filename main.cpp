@@ -35,24 +35,11 @@ int main(int argc, char** argv) {
             return -1;
         }
     }
-    /* for (auto port: ports){
-        cout << port << endl;
-    } */
-
-    // Create ad manager and send in ports
     auto am = AdManager(ports);
 
     men_entry(am);
 
-    // Read file
-    am.readFile();
 
-
-/*     auto test_ad = Company("Danial", "LGG", 10000000);
-    auto test_ad1 = Company("Google1", "Googolplex1", 1500);
-    am.addCompany(test_ad);
-    am.addCompany(test_ad1);
-    am.sendAdsToSerial(); */
 
     
     return 0;
