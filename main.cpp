@@ -42,9 +42,14 @@ int main(int argc, char** argv) {
 
     //Prints out first Test company
     cout << "Company 1: \n";
+    
     c1.printCompany();
 
     am.addCompany(c1);
+    
+    c1.writeToFile();
+    
+
 
     //Prints out second Test company
     cout << "Company 2: \n";

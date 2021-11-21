@@ -18,7 +18,7 @@ class AdManager {
     
     void calculateAdTime();
 
-    public: 
+public: 
     AdManager(vector<string> serialPorts);
 
     void addCompany(Company company);
