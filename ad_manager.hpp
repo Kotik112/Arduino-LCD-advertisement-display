@@ -10,7 +10,7 @@
 
 using std::vector;
 
-class AdManager {
+class AdManager { 
     vector<Company> companyAds;
     vector<std::string> serialPorts;
     int fullAdTime;
