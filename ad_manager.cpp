@@ -122,3 +122,10 @@ vector<string> AdManager::splitString(string text, string delimiter) {
     return parts;
 }
 
+int AdManager::am_company_size() {
+    int total = 0;
+    for(auto company: companyAds) {
+        total++;
+    }
+    return total;
+}
