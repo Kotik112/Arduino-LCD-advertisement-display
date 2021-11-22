@@ -31,7 +31,8 @@ string men_get_string_input(const char* text) {
 
     string io_get_string;
     cout << text << endl;
-    cin >> io_get_string >> endl;
+    cin.ignore();
+    getline(cin, io_get_string);
     
 
     if (io_get_string.length() < 1 || io_get_string.length() > 100 ) {
