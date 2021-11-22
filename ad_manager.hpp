@@ -11,7 +11,7 @@
 using std::vector;
 using std::string;
 
-class AdManager {
+class AdManager { 
     vector<Company> companyAds;
     vector<string> serialPorts;
     int fullAdTime;
@@ -22,6 +22,8 @@ public:
     AdManager(vector<string> serialPorts);
 
     void addCompany(Company company);
+    // void removeCompany(Company company);
+    //int setAdTime();
     void sendAdsToSerial();
     void readFile();
     vector<string> splitString(string text, string delimiter);
