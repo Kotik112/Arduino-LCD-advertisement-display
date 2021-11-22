@@ -17,17 +17,12 @@ struct Company {
     //Constructor
     Company(string name, string message, int bid);
 
-    void set_exposure(float exposure);
+    void set_exposure(string exposure);
     //Encodes a 'Company' object to a string
     string encodeToSerial();
     bool writeToFile();
     void printCompany();
 
 };
-
-string io_get_string_input(const char* text);
-int io_get_int_input(const char* text);
-Company get_company_input(void);
-
 
 #endif

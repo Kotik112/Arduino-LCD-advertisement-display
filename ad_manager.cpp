@@ -1,4 +1,4 @@
-
+#include <string>
 #include <fstream>
 #include <sstream>
 #include "serial.h"
@@ -22,14 +22,15 @@ void AdManager::calculateAdTime() {
     // Set exposure to be total secs * bid fraction
     float total = 0;
     for (auto company: this->companyAds) {
+        std::stringstream ss;
         //std::cout << "Full ad time: " << fullAdTime << std::endl;
         //std::cout << "Company bid: " << company.bid << ". Total bids: " << total_bids <<
         //". Turns into exposure of: " << ((float)company.bid / (float)total_bids) * (float)fullAdTime << std::endl;
-        company.exposure = ((float)company.bid / (float)total_bids) * (float)fullAdTime;
-        std::cout << "Company exposure: " << company.exposure << std::endl;
-        total += stoi(company.exposure); 
+        int exposure = static_cast<int>((float)company.bid / (float)total_bids) * (float)fullAdTime;
+        ss << exposure;
+        ss >> company.exposure;
+        std::cout << "Company exposure (inside calc_time): " << company.exposure << std::endl;
     }
-    std::cout << "Sum total expsure: " << total << std::endl;
 }
 
 void AdManager::addCompany(Company company) {
@@ -54,9 +55,9 @@ void AdManager::sendAdsToSerial() {
             //std::shuffle(companyAds.begin(), companyAds.end());
 
             // Write ad info to to port
-            for (auto company: this->companyAds) {
+            for (auto company: companyAds) {
                 string message = company.encodeToSerial();
-                std::cout << company.exposure << std::endl;
+                std::cout << "Company exposure (inside sendToSerial): " << company.exposure << std::endl;
                 std::cout << message << std::endl;
                 SerialWritePort(port, (char*) message.c_str(), message.length());
             }

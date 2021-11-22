@@ -1,6 +1,11 @@
 /* TODO:
-    - Int input får inte vara minus. (company.cpp)
+    - Lägg till main menu.
+    - Swap på arduinon. (VG)
+    - Save to file i AdManager.
+    - Exposed blir sträng
+    - Readme.txt
 
+    - BETA TESTA KODEN O FIXA
  */
 
 #include <iostream>
@@ -8,10 +13,28 @@
 #include <vector>
 #include <cmath>
 #include "ad_manager.hpp"
-#include "menu.hpp"
 #include "serial.h"
 
 using namespace std;
+
+void flush_file() {
+    std::ofstream ofs;
+    ofs.open("ads.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
+}
+
+void print_menu(void) {
+    cout << "#############################" << endl;
+    cout << "####### MAIN MENU ###########" << endl;
+    cout << "#                           #" << endl;
+    cout << "#    SELECT OPTION BELOW    #" << endl;
+    cout << "#   1. Add Adversistment    #" << endl;
+    cout << "#   2. Export Ads to Ardu   #" << endl;
+    cout << "#   3. Flush file           #" << endl;
+    cout << "#   4. Exit                 #" << endl;
+    cout << "#                           #" << endl;
+    cout << "#############################" << endl << endl;
+}
 
 string take_str_input(const char* text) {
     char company[25];
@@ -61,12 +84,12 @@ int main(int argc, char** argv) {
         }
     }
     auto am = AdManager(ports);
-    men_flush_file();
+    flush_file();
 
 
     while(true) {
         int answer = 0;
-        men_print_menu();
+        print_menu();
         cout << "Enter your choice: " << endl;
         cin >> answer;
 

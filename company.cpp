@@ -12,8 +12,8 @@ Company::Company(string name, string message, int bid):
     exposure() 
     {} 
 
-void Company::set_exposure(float exposure) {
-  this->exposure = exposure;
+void Company::set_exposure(string _exposure) {
+  exposure = _exposure;
 }
 
 // Encodes the struct variables with '|' delimiter.
@@ -28,7 +28,7 @@ bool Company::writeToFile()
     outputFile.open("ads.txt", std::ios::app);
     if (outputFile.is_open()) {
       cout << "OPENED FILE\n";
-      outputFile << this->name << "|" << this->message << "|" << this->bid<< "|" << std::endl;
+      outputFile << name << "|" << message << "|" << bid<< "|" << std::endl;
       outputFile.close();
       return true;
     }
@@ -39,8 +39,8 @@ bool Company::writeToFile()
   }
 
   void Company::printCompany() {
-      cout << "Name: " << this->name << std::endl;
-      cout << "Msg: " << this->message << std::endl;
-      cout << "Bid: " << this->bid << std::endl;
-      cout << "Expsr: " << this->exposure << std::endl;
+      cout << "Name: " << name << std::endl;
+      cout << "Msg: " << message << std::endl;
+      cout << "Bid: " << bid << std::endl;
+      cout << "Expsr: " << exposure << std::endl;
   }
