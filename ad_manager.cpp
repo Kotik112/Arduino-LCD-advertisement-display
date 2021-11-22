@@ -38,6 +38,13 @@ void AdManager::addCompany(Company company) {
     std::cout << "Added company to vector. \n";
 }
 
+int AdManager::companySize() {
+    int total = 0;
+    for (auto company: this->companyAds)
+        total++;
+    return total;
+}
+
 void AdManager::sendAdsToSerial() {
     // Calculate time
     this->calculateAdTime();
@@ -69,14 +76,28 @@ void AdManager::sendAdsToSerial() {
 
 }
 
+/* long stoi(const char *s)
+{
+    long i;
+    i = 0;
+    while(*s >= '0' && *s <= '9')
+    {
+        i = i * 10 + (*s - '0');
+        s++;
+    }
+    return i;
+} */
+
 void AdManager::readFile() {
     // read file to stringsteam
-    std::stringstream ss;
+    std::stringstream ss, ss2;
     std::ifstream fp ("ads.txt");
     if (fp.is_open()) {
         ss << fp.rdbuf();
     }
     fp.close();
+    this->companyAds.clear();
+    std::cout << this->companyAds.size() << "\n";
     string file_contents = ss.str();
 
     // split to lines
@@ -87,11 +108,17 @@ void AdManager::readFile() {
         auto ad_parts = this->splitString(ad_text, "|");
         string company_name = ad_parts[0];
         string message = ad_parts[1];
-        int bid = stoi(ad_parts[2]);
+        //Allt detta för att få en sträng till int. Funkar ej.
+        ss2 << ad_parts[2];
+        string bid_string;
+        ss2 >> bid_string;
+        int bid = atoi(bid_string.c_str());
+
         this->addCompany(Company(company_name, message, bid));
     }
 
 }
+
 
 vector<string> AdManager::splitString(string text, string delimiter) {
     vector<string> parts;

@@ -83,7 +83,7 @@ int men_entry_choice(const char* text) {
 	return -1;
 }
 
-void men_flush_file(const char* text) {
+void men_flush_file() {
     std::ofstream ofs;
     ofs.open("ads.txt", std::ofstream::out | std::ofstream::trunc);
     ofs.close();
@@ -96,7 +96,7 @@ void men_print_menu(void) {
     cout << "#    SELECT OPTION BELOW    #" << endl;
     cout << "#   1. Add Adversistment    #" << endl;
     cout << "#   2. Export Ads to Ardu   #" << endl;
-    cout << "#   3. Flush file           #" << endl;
+    cout << "#   3. Read file            #" << endl;
     cout << "#   4. Exit                 #" << endl;
     cout << "#                           #" << endl;
     cout << "#############################" << endl << endl;
@@ -148,7 +148,7 @@ int men_entry(AdManager am) {
 
             case DEL:  //Flushes ads.txt
 
-                men_flush_file("ads.txt");
+                //men_flush_file("ads.txt");
                 break;
 
             case EXT:  //Exit program.

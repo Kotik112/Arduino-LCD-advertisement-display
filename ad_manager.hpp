@@ -22,13 +22,13 @@ public:
     AdManager(vector<string> serialPorts);
 
     void addCompany(Company company);
-    // void removeCompany(Company company);
     
+    // void removeCompany(Company company);
+    int companySize(); 
     void sendAdsToSerial();
     void readFile();
     vector<string> splitString(string text, string delimiter);
     void print_string_vector();
 };
-
 
 #endif

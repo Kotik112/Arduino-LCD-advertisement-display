@@ -13,6 +13,31 @@
 
 using namespace std;
 
+string take_str_input(const char* text) {
+    char company[25];
+    cout << text << endl;
+    cin >> company;
+    return (string)company;
+}
+
+int take_int_input(const char* text) {
+    char company[25];
+    cout << text << endl;
+    cin >> company;
+    return atoi(company);
+}
+
+
+void create_company(AdManager& am) {
+    string company = take_str_input("Enter company name: ");
+    string message = take_str_input("Enter message: ");
+    int bid = take_int_input("Enter your bid: ");
+    Company new_company = Company(company, message, bid);
+    new_company.writeToFile();
+    am.addCompany(new_company);
+
+}
+
 int main(int argc, char** argv) {
     if (argc < 2) {
         cerr << "Error. You must specify the port number." << endl;
@@ -36,11 +61,78 @@ int main(int argc, char** argv) {
         }
     }
     auto am = AdManager(ports);
-    am.readFile();
+    men_flush_file();
 
-    am.sendAdsToSerial();
+
+    while(true) {
+        int answer = 0;
+        men_print_menu();
+        cout << "Enter your choice: " << endl;
+        cin >> answer;
+
+        if (answer == 1) {
+            if(am.companySize() > 5) {
+                cerr << "Max 5 entries." << endl;
+            }
+            create_company(am);
+        }
+        else if (answer == 2) {
+            am.sendAdsToSerial();
+        }
+        else if (answer == 3) {
+            am.readFile();
+        }
+        else if (answer == 4) {
+            exit(0);
+        }
+        else {
+            cerr << "Choices are 1 to 4." << endl;
+        }
+    }
+
+    /* int answer = 1;
+    bool stay_in_loop = true;
+    while (stay_in_loop) {
+        
+        do
+        {   
+            men_print_menu();
+            cout << "Enter your choice: " << endl;
+            cin >> answer;
+            switch (answer)
+            {
+                men_print_menu();
+                cout << "Enter your choice: " << endl;
+                cin >> answer;
+
+                case 1: // Add company
+                    if(am.companySize() > 5) {
+                        cerr << "Max 5 entries." << endl;
+                    }
+                    create_company(am);
+                    stay_in_loop = true;
+
+                case 2:
+                    am.readFile();
+                    am.sendAdsToSerial();
+                    stay_in_loop = true;
+
+                case 3:
+                    am.readFile();
+                    stay_in_loop = true;
+
+                case 4:
+                    cout << "Exiting the program." << endl;
+                    answer = 5;
+                    stay_in_loop = false;
+
+                default:
+                    cout << "Bad choice! Please try again later.\n";
+                    return false;
+            }
+        } while (answer <= 0 || answer > 4);
+    } */
     
-
     
     return 0;
 }
