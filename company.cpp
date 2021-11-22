@@ -12,13 +12,13 @@ Company::Company(string name, string message, int bid):
     exposure() 
     {} 
 
-void Company::set_exposure(string _exposure) {
+void Company::set_exposure(int _exposure) {
   exposure = _exposure;
 }
 
 // Encodes the struct variables with '|' delimiter.
 string Company::encodeToSerial() {
-    return name + "|" + message + "|" + exposure + "|";
+    return name + "|" + message + "|" + std::to_string(exposure) + "|";
 }
 
 
