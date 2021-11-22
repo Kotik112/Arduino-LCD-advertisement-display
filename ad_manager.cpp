@@ -44,7 +44,6 @@ void AdManager::sendAdsToSerial() {
 
     // In every serial port name
     for (auto serialName: this->serialPorts) {
-
         // Init the port
         auto port = SerialInit((char*)serialName.c_str());
         // Check if it's connected

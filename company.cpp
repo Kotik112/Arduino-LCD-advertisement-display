@@ -8,17 +8,11 @@ using std::cin;
 Company::Company(string name, string message, int bid):
     name(name), 
     message(message), 
-    bid(bid), 
-    exposure() 
-    {} 
+    bid(bid),
+    exposure()
+     
+    {std::cout << "Constructor running." << std::endl;} 
 
-Company::Company(const Company& other) {
-    name = other.name;
-    message = other.message;
-    bid = other.bid;
-    exposure = other.exposure;
-    cout << "Copy contructor running.\n";
-}
 Company::~Company() {
   cout << "Running distructor on company with exposure " << exposure << std::endl;
 }
