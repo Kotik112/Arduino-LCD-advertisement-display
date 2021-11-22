@@ -8,17 +8,22 @@ using std::cin;
 Company::Company(string name, string message, int bid):
     name(name), 
     message(message), 
-    bid(bid), 
-    exposure() 
-    {} 
+    bid(bid),
+    exposure()
+     
+    {std::cout << "Constructor running." << std::endl;} 
 
-void Company::set_exposure(string _exposure) {
+Company::~Company() {
+  cout << "Running distructor on company with exposure " << exposure << std::endl;
+}
+
+void Company::set_exposure(int _exposure) {
   exposure = _exposure;
 }
 
 // Encodes the struct variables with '|' delimiter.
 string Company::encodeToSerial() {
-    return name + "|" + message + "|" + exposure + "|";
+    return name + "|" + message + "|" + std::to_string(exposure) + "|";
 }
 
 

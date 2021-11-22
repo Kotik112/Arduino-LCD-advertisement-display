@@ -93,10 +93,12 @@ int main(int argc, char** argv) {
         cout << "Enter your choice: " << endl;
         cin >> answer;
 
+        //
         if (answer == 1) {
-            /* if(am.companySize() > 5) {
+            if(am.am_company_size() > 5) {
                 cerr << "Max 5 entries." << endl;
-            } */
+                continue;
+            }
             create_company(am);
         }
         else if (answer == 2) {
