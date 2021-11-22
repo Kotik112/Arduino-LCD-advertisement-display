@@ -15,7 +15,7 @@ struct Company {
     string exposure;
 
     //Constructor
-    Company(string name, string message, int bid, string exposure);
+    Company(string name, string message, int bid);
 
     void set_exposure(float exposure);
     //Encodes a 'Company' object to a string

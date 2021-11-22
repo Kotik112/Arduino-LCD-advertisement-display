@@ -1,8 +1,8 @@
 
-#include <algorithm>
 #include <fstream>
 #include <sstream>
 #include "serial.h"
+#include "company.hpp"
 #include "ad_manager.hpp"
 
 AdManager::AdManager(vector<std::string> serialPorts): 
@@ -22,30 +22,21 @@ void AdManager::calculateAdTime() {
     // Set exposure to be total secs * bid fraction
     float total = 0;
     for (auto company: this->companyAds) {
-        std::cout << "Full ad time: " << fullAdTime << std::endl;
-        std::cout << "Company bid: " << company.bid << ". Total bids: " << total_bids <<
-        ". Turns into exposure of: " << ((float)company.bid / (float)total_bids) * (float)fullAdTime << std::endl;
-        company.set_exposure(((float)company.bid / (float)total_bids) * (float)fullAdTime);
+        //std::cout << "Full ad time: " << fullAdTime << std::endl;
+        //std::cout << "Company bid: " << company.bid << ". Total bids: " << total_bids <<
+        //". Turns into exposure of: " << ((float)company.bid / (float)total_bids) * (float)fullAdTime << std::endl;
+        company.exposure = ((float)company.bid / (float)total_bids) * (float)fullAdTime;
         std::cout << "Company exposure: " << company.exposure << std::endl;
-        //total += company.exposure; 
+        total += stoi(company.exposure); 
     }
     std::cout << "Sum total expsure: " << total << std::endl;
 }
-
-/* int AdManager::setAdTime() {
-    int total_bids = 0;
-    for (auto company: this->companyAds) {
-        total_bids += company.bid;
-        std::cout << "Current total: " << total_bids << std::endl;
-    }
-    
-
-} */
 
 void AdManager::addCompany(Company company) {
     this->companyAds.push_back(company);
     std::cout << "Added company to vector. \n";
 }
+
 
 void AdManager::sendAdsToSerial() {
     // Calculate time
@@ -60,15 +51,12 @@ void AdManager::sendAdsToSerial() {
         if(SerialIsConnected(port)) {
             std::cout << "Connected!\n";
             // Shuffle the ads
-           /*  int size = this->companyAds.size();
-            for (int i = 0; i < size - 1; i++) {
-                int j = i + rand() % (size - i);
-                swap(this->companyAds[i], this->companyAds[j]);
-            }  */
+            //std::shuffle(companyAds.begin(), companyAds.end());
 
             // Write ad info to to port
             for (auto company: this->companyAds) {
                 string message = company.encodeToSerial();
+                std::cout << company.exposure << std::endl;
                 std::cout << message << std::endl;
                 SerialWritePort(port, (char*) message.c_str(), message.length());
             }
@@ -82,49 +70,47 @@ void AdManager::sendAdsToSerial() {
 
 }
 
+
 void AdManager::readFile() {
-    
     // read file to stringsteam
-    std::stringstream ss;
-    std::fstream fp ("ads.txt", std::ios::in);
+    std::stringstream ss, ss2;
+    std::ifstream fp ("ads.txt");
     if (fp.is_open()) {
-        if (!fp) {
-        std::cout << "No such file";
-        }
-    }
-    else {
-        char ch;
-
-        while (1) {
-            fp >> ch;
-            if (fp.eof())
-                break;
-
-            std::cout << ch;
-        }
-
+        ss << fp.rdbuf();
     }
     fp.close();
+    std::cout << this->companyAds.size() << "\n";
     string file_contents = ss.str();
 
     // split to lines
     auto lines = this->splitString(file_contents, "\n");
 
     // split to parts
-    for (auto ad_text : lines) {
-        auto ad_parts = this->splitString(ad_text, "|");
+    for (auto ad_text: lines) {
+        auto ad_parts = splitString(ad_text, "|");
+        string company_name = ad_parts[0];
+        string message = ad_parts[1];
+        //Allt detta för att få en sträng till int. Funkar ej.
+        ss2 << ad_parts[2];
+        string bid_string;
+        ss2 >> bid_string;
+        int bid = atoi(bid_string.c_str());
+        auto new_company = Company(company_name, message, bid);
+        addCompany(new_company);
     }
+
 }
+
 
 vector<string> AdManager::splitString(string text, string delimiter) {
     vector<string> parts;
     size_t start = 0;
     size_t end = 0;
-    // std::cout << "looking for:" << delimiter << " in:" << text << std::endl;
+    //std::cout << "looking for:" << delimiter << " in:" << text << std::endl;
     //std::cout << "Text is " << text.length()  << " long and delimiter is: " << delimiter.length() << " long." << std::endl;
     while((end = text.find(delimiter, start)) != std::string::npos) {
         //std::cout << "Positions are start: " << start << " end: "<< end << std::endl;
-        // std::cout << "Found pos:" << end << std::endl;
+        //std::cout << "Found pos:" << end << std::endl;
         size_t length = end - start;
         parts.push_back(text.substr(start, length));
         start = end + delimiter.length();

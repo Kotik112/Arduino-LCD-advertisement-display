@@ -5,11 +5,11 @@ using std::cout;
 using std::cin;
 
 //Constructor
-Company::Company(string name, string message, int bid, string exposure):
+Company::Company(string name, string message, int bid):
     name(name), 
     message(message), 
     bid(bid), 
-    exposure(exposure) 
+    exposure() 
     {} 
 
 void Company::set_exposure(float exposure) {
@@ -18,7 +18,7 @@ void Company::set_exposure(float exposure) {
 
 // Encodes the struct variables with '|' delimiter.
 string Company::encodeToSerial() {
-    return this->name + "|" + this->message + "|" + this->exposure + "|";
+    return name + "|" + message + "|" + exposure + "|";
 }
 
 

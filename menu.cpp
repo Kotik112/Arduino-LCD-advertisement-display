@@ -22,9 +22,8 @@ Company get_company_input(void) {
     string name = men_get_string_input("Enter company name: ");
     string message = men_get_string_input("Enter company message: ");
     int bid = men_get_int_input("Enter your bid for the advertisement: ");
-    string exposure;
 
-    Company new_company = Company(name, message, bid, exposure);
+    Company new_company = Company(name, message, bid);
     return new_company;
 }
 
@@ -86,7 +85,7 @@ int men_entry_choice(const char* text) {
 	return -1;
 }
 
-void men_flush_file(const char* text) {
+void men_flush_file() {
     std::ofstream ofs;
     ofs.open("ads.txt", std::ofstream::out | std::ofstream::trunc);
     ofs.close();
@@ -151,7 +150,7 @@ int men_entry(AdManager am) {
 
             case DEL:  //Flushes ads.txt
 
-                men_flush_file("ads.txt");
+                men_flush_file();
                 break;
 
             case EXT:  //Exit program.

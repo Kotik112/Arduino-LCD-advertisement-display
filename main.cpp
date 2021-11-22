@@ -13,6 +13,31 @@
 
 using namespace std;
 
+string take_str_input(const char* text) {
+    char company[25];
+    cout << text << endl;
+    cin >> company;
+    return company;
+}
+
+int take_int_input(const char* text) {
+    char company[25];
+    cout << text << endl;
+    cin >> company;
+    return atoi(company);
+}
+
+
+void create_company(AdManager& am) {
+    string company = take_str_input("Enter company name: ");
+    string message = take_str_input("Enter message: ");
+    int bid = take_int_input("Enter your bid: ");
+    auto new_company = Company(company, message, bid);
+    new_company.writeToFile();
+    am.addCompany(new_company);
+
+}
+
 int main(int argc, char** argv) {
     if (argc < 2) {
         cerr << "Error. You must specify the port number." << endl;
@@ -36,54 +61,34 @@ int main(int argc, char** argv) {
         }
     }
     auto am = AdManager(ports);
-
-    auto c1 = Company("Unn", "My company is awesome!", 1500, "30");
-    auto c2 = Company("Jakob", "#testing@special-chars", 2000, "30");
-    auto c3 = Company("Arman", "C++ is really hard.", 2000, "30");
-    auto c4 = Company("Google", "><(((*>", 2000, "30");
-    auto c5 = Company("IKEA", "        ", 2000, "30");
-    
-
-    //Prints out first Test company
-    cout << "Company 1: \n";
-    
-    c1.printCompany();
-
-    am.addCompany(c1);
-    
-    c1.writeToFile();
-    
+    men_flush_file();
 
 
-    //Prints out second test company
-    cout << "Company 2: \n";
-    c2.printCompany();
+    while(true) {
+        int answer = 0;
+        men_print_menu();
+        cout << "Enter your choice: " << endl;
+        cin >> answer;
 
-    am.addCompany(c2);
-
-    //Prints out third test company
-    cout << "Company 3: \n";
-    c3.printCompany();
-
-    am.addCompany(c3);
-
-    //Prints out fourth test company
-    cout << "Company 2: \n";
-    c4.printCompany();
-
-    am.addCompany(c4);
-
-    //Prints out fifth test company
-    cout << "Company 2: \n";
-    c5.printCompany();
-
-    am.addCompany(c5);
-
-
-
-
-    am.sendAdsToSerial();
-
+        if (answer == 1) {
+            /* if(am.companySize() > 5) {
+                cerr << "Max 5 entries." << endl;
+            } */
+            create_company(am);
+        }
+        else if (answer == 2) {
+            am.sendAdsToSerial();
+        }
+        else if (answer == 3) {
+            am.readFile();
+        }
+        else if (answer == 4) {
+            exit(0);
+        }
+        else {
+            cerr << "Choices are 1 to 4." << endl;
+        }
+    }
     
     return 0;
 }

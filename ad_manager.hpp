@@ -22,8 +22,6 @@ public:
     AdManager(vector<string> serialPorts);
 
     void addCompany(Company company);
-    // void removeCompany(Company company);
-    //int setAdTime();
     void sendAdsToSerial();
     void readFile();
     vector<string> splitString(string text, string delimiter);
