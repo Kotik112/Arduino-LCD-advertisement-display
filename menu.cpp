@@ -91,7 +91,7 @@ void men_flush_file() {
 
 void men_print_menu(void) {
     cout << "#############################" << endl;
-    cout << "####### MAIN MENU ###########" << endl;
+    cout << "######### MAIN MENU #########" << endl;
     cout << "#                           #" << endl;
     cout << "#    SELECT OPTION BELOW    #" << endl;
     cout << "#   1. Add Adversistment    #" << endl;
@@ -147,8 +147,8 @@ int men_entry(AdManager am) {
                 break;
 
             case DEL:  //Flushes ads.txt
-
-                men_flush_file();
+                read_file();
+                //men_flush_file();
                 break;
 
             case EXT:  //Exit program.
