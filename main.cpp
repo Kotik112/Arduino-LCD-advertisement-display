@@ -30,8 +30,10 @@ void print_menu(void) {
     cout << "#    SELECT OPTION BELOW    #" << endl;
     cout << "#   1. Add Adversistment    #" << endl;
     cout << "#   2. Export Ads to Ardu   #" << endl;
-    cout << "#   3. Flush file           #" << endl;
-    cout << "#   4. Exit                 #" << endl;
+    cout << "#   3. Save to file         #" << endl;
+    cout << "#   4. Read from file       #" << endl;
+    cout << "#   5. Flush file           #" << endl;
+    cout << "#   6. Exit                 #" << endl;
     cout << "#                           #" << endl;
     cout << "#############################" << endl << endl;
 }
@@ -43,22 +45,13 @@ string take_str_input(const char* text) {
     return company;
 }
 
-int take_int_input(const char* text) {
-    char company[25];
-    cout << text << endl;
-    cin >> company;
-    return atoi(company);
-}
-
-
 void create_company(AdManager& am) {
     string company = take_str_input("Enter company name: ");
     string message = take_str_input("Enter message: ");
-    int bid = take_int_input("Enter your bid: ");
+    string bid = take_str_input("Enter your bid: ");
     auto new_company = Company(company, message, bid);
     new_company.writeToFile();
     am.addCompany(new_company);
-
 }
 
 int main(int argc, char** argv) {
@@ -102,10 +95,10 @@ int main(int argc, char** argv) {
             create_company(am);
         }
         else if (answer == 2) {
-            am.sendAdsToSerial();
+            am.am_send_ad_to_serial();
         }
         else if (answer == 3) {
-            am.readFile();
+            am.am_read_file("ads.txt");
         }
         else if (answer == 4) {
             exit(0);

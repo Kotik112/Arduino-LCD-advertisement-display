@@ -9,22 +9,23 @@
 #define MAX_TIME 60
 
 using std::vector;
-using std::string;
 
 class AdManager {
     vector<Company> companyAds;
-    vector<string> serialPorts;
+    vector<std::string> serialPorts;
     int fullAdTime;
-    
-    void calculateAdTime();
 
-public: 
-    AdManager(vector<string> serialPorts);
-
+    vector<string> splitString(std::string text, std::string delimiter);
+public:
+    /* Constructor. */
+    AdManager(vector<std::string> serialPorts);
+    /* Adds a company to the companyAds vector. */
     void addCompany(Company company);
-    void sendAdsToSerial();
-    void readFile();
-    vector<string> splitString(string text, string delimiter);
+    /* Connects to COM ports and sends the company ads through. */
+    void am_send_ad_to_serial();
+    /* Reads file. */
+    void am_read_file(const char* text);
+    /* Returns the size of companyAds vector */
     int am_company_size();
 };
 

@@ -10,40 +10,13 @@ fullAdTime(MAX_TIME),
 serialPorts(serialPorts)
 {}
 
-void AdManager::calculateAdTime() {
-    // Add up up all bids to a total
-    int total_bids = 0;
-    std::cout << "Calculating total time!\n";
-    for (auto company: this->companyAds) {
-        total_bids += company.bid;
-        std::cout << "Current total: " << total_bids << std::endl;
-    }
-    std::cout << "Sum total bids: " << total_bids << std::endl;
-    // Set exposure to be total secs * bid fraction
-    float total = 0;
-    for (auto company: this->companyAds) {
-        std::cout << "Full ad time: " << fullAdTime << std::endl;
-        std::cout << "Company bid: " << company.bid << ". Total bids: " << total_bids <<
-        ". Turns into exposure of: " << ((float)company.bid / (float)total_bids) * (float)fullAdTime << std::endl;
-        company.exposure = ((float)company.bid / (float)total_bids) * (float)fullAdTime;
-        std::cout << "Company exposure: " << company.exposure << std::endl;
-        total += company.exposure; 
-    }
-    std::cout << "Sum total expsure: " << total << std::endl;
-}
-
 void AdManager::addCompany(Company company) {
     this->companyAds.push_back(company);
-    std::cout << "Added company to vector. \n";
 }
 
-
-void AdManager::sendAdsToSerial() {
-    // Calculate time
-    this->calculateAdTime();
-
+void AdManager::am_send_ad_to_serial() {
     // In every serial port name
-    for (auto serialName: this->serialPorts) {
+    for (auto serialName: serialPorts) {
         // Init the port
         auto port = SerialInit((char*)serialName.c_str());
         // Check if it's connected
@@ -55,7 +28,6 @@ void AdManager::sendAdsToSerial() {
             // Write ad info to to port
             for (auto company: companyAds) {
                 string message = company.encodeToSerial();
-                std::cout << "Company exposure (inside sendToSerial): " << company.exposure << std::endl;
                 std::cout << message << std::endl;
                 SerialWritePort(port, (char*) message.c_str(), message.length());
             }
@@ -70,36 +42,31 @@ void AdManager::sendAdsToSerial() {
 }
 
 
-void AdManager::readFile() {
+void AdManager::am_read_file(const char* text) {
     // read file to stringsteam
     std::stringstream ss, ss2;
-    std::ifstream fp ("ads.txt");
+    std::ifstream fp (text);
     if (fp.is_open()) {
         ss << fp.rdbuf();
     }
     fp.close();
-    std::cout << this->companyAds.size() << "\n";
+    std::cout << companyAds.size() << "\n";
     string file_contents = ss.str();
 
     // split to lines
-    auto lines = this->splitString(file_contents, "\n");
+    auto lines = splitString(file_contents, "\n");
 
     // split to parts
     for (auto ad_text: lines) {
         auto ad_parts = splitString(ad_text, "|");
         string company_name = ad_parts[0];
         string message = ad_parts[1];
-        //Allt detta för att få en sträng till int. Funkar ej.
-        ss2 << ad_parts[2];
-        string bid_string;
-        ss2 >> bid_string;
-        int bid = atoi(bid_string.c_str());
+        string bid = ad_parts[2];
         auto new_company = Company(company_name, message, bid);
         addCompany(new_company);
     }
 
 }
-
 
 vector<string> AdManager::splitString(string text, string delimiter) {
     vector<string> parts;

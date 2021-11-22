@@ -1,29 +1,17 @@
 #include "company.hpp"
 #include <iostream>
 
-using std::cout;
-using std::cin;
-
 //Constructor
-Company::Company(string name, string message, int bid):
+Company::Company(string name, string message, string bid):
     name(name), 
     message(message), 
-    bid(bid),
-    exposure()
-     
-    {std::cout << "Constructor running." << std::endl;} 
+    bid(bid)
+    {} 
 
-Company::~Company() {
-  cout << "Running distructor on company with exposure " << exposure << std::endl;
-}
-
-void Company::set_exposure(int _exposure) {
-  exposure = _exposure;
-}
 
 // Encodes the struct variables with '|' delimiter.
 string Company::encodeToSerial() {
-    return name + "|" + message + "|" + std::to_string(exposure) + "|";
+    return name + "|" + message + "|" + bid + "|";
 }
 
 
@@ -32,7 +20,7 @@ bool Company::writeToFile()
     std::ofstream outputFile;
     outputFile.open("ads.txt", std::ios::app);
     if (outputFile.is_open()) {
-      cout << "OPENED FILE\n";
+      std::cout << "OPENED FILE\n";
       outputFile << name << "|" << message << "|" << bid<< "|" << std::endl;
       outputFile.close();
       return true;
@@ -44,8 +32,7 @@ bool Company::writeToFile()
   }
 
   void Company::printCompany() {
-      cout << "Name: " << name << std::endl;
-      cout << "Msg: " << message << std::endl;
-      cout << "Bid: " << bid << std::endl;
-      cout << "Expsr: " << exposure << std::endl;
+      std::cout << "Name: " << name << std::endl;
+      std::cout << "Msg: " << message << std::endl;
+      std::cout << "Bid: " << bid << std::endl;
   }

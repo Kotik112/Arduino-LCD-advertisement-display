@@ -11,18 +11,15 @@ using std::string;
 struct Company {
     string name;
     string message;
-    int bid;
-    int exposure;
+    string bid;
 
     //Constructor
-    Company(string name, string message, int bid);
-    ~Company();
-    void set_exposure(int exposure);
-    //Encodes a 'Company' object to a string
+    Company(string name, string message, string bid);
+
+    //Encodes a 'Company' struct to a string
     string encodeToSerial();
     bool writeToFile();
     void printCompany();
-
 };
 
 #endif
