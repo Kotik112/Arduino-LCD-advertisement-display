@@ -44,22 +44,20 @@ string men_get_string_input(const char* text) {
     return 0;
 }
 
-int men_get_int_input(const char* text) {
-    unsigned int io_get_int;
-
+int men_get_input(const char* text) {
+    
+    string io_get_int;
+     
     cout << text << endl;
     cin >> io_get_int;
-
-    if (!cin) {
-      cout << "No text allowed." << endl;
-      return -1;
+    if(io_get_int[0] == '-') {
+            std::cerr << "Invalid number entered." << endl;
+            return -1;
+        }
+    else {
+        int the_int = stoi(io_get_int);
+        return the_int;
     }
-    else if(io_get_int < 0) {
-      cout << "ERROR" << endl;
-      return -1;
-    }
-
-    return io_get_int;
     return 0;
 }
 
