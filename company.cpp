@@ -12,6 +12,17 @@ Company::Company(string name, string message, int bid):
     exposure() 
     {} 
 
+Company::Company(const Company& other) {
+    name = other.name;
+    message = other.message;
+    bid = other.bid;
+    exposure = other.exposure;
+    cout << "Copy contructor running.\n";
+}
+Company::~Company() {
+  cout << "Running distructor on company with exposure " << exposure << std::endl;
+}
+
 void Company::set_exposure(int _exposure) {
   exposure = _exposure;
 }

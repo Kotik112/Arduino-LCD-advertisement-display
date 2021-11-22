@@ -16,7 +16,8 @@ struct Company {
 
     //Constructor
     Company(string name, string message, int bid);
-
+    Company(const Company& other);
+    ~Company();
     void set_exposure(int exposure);
     //Encodes a 'Company' object to a string
     string encodeToSerial();
