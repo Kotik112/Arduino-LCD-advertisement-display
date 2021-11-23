@@ -129,6 +129,8 @@ int main(int argc, char** argv) {
     auto am = AdManager(ports);
     int choice;
     while(1){
+        print_menu();
+        //input here
         switch (choice)
         {
         /* Add a new company to vector. */
@@ -166,35 +168,9 @@ int main(int argc, char** argv) {
             break;
         
         default:
+            cerr << "Choices are 1-6." << endl;
             break;
         }
     }
     
 
-/*
- std::cout << "MAIN_MENU" << std::endl;
-    std::cout << "SELECT 1) ADD\t\t2) GET\t\t3) EXIT" << endl;
-    int staged = 0;
-    while(1) {
-        int choice = men_entry();
-        switch(choice) {
-            case SET:
-                cmp_manager(company);
-                /  in med vector, fyll medlemmarna /
-                std::cout << "\nyou've staged all companies. let's run the ads!" << endl;
-                break;
-            case RUN:
-                /  skicka in vector med medlemmar till exportlogik /
-                std::cout << "RUNNING THE SHOW" << endl;
-                pkt_export();
-                break;
-            case EXT:
-                / avsluta /
-                std::cout << "inne i EXT" << endl;
-                return 0;
-            default:
-                std::cout << "try again." << endl;
-        }
-    }
-    return 0;
-} */
