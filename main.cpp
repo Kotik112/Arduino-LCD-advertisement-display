@@ -65,13 +65,33 @@ static string cmp_add_bid(void) {
         char ch = bid[i];
 		if(!int_check(ch)) {
 			cout << "you've not entered a digit. try again." << endl;
-			return cmp_add_name();
+			return cmp_add_bid();
 		} else if (bid.length() > MAX_CMP_BID){
 			cout << "to large number, try again" << endl;
-			return cmp_add_name();
+			return cmp_add_bid();
 		}
 	}
     return bid;
+}
+
+static int menu_choice(void) {
+    int choice;
+	std::cout << "Enter menu choice (1-6): ";
+    std::cin >> choice;
+    string choice_str = std::to_string(choice);
+	for (unsigned int i = 0; i < choice_str.length(); i++) {
+        char ch = choice_str[i];
+		if(!int_check(ch)) {
+			cout << "you've not entered a digit. try again." << endl;
+			return menu_choice();
+		} else if (choice_str.length() > 1){
+			cout << "to large number, try again" << endl;
+			return menu_choice();
+		}
+	}
+    choice = atoi( choice_str.c_str() );
+    choice--;  //To adjust for the enum offset.
+    return choice;
 }
 
 void flush_file(const char* text) {
@@ -130,7 +150,7 @@ int main(int argc, char** argv) {
     int choice;
     while(1){
         print_menu();
-        //input here
+        choice = menu_choice();
         switch (choice)
         {
         /* Add a new company to vector. */
@@ -172,5 +192,6 @@ int main(int argc, char** argv) {
             break;
         }
     }
+}
     
 
