@@ -115,3 +115,7 @@ int AdManager::am_company_size() {
     }
     return total;
 }
+
+void AdManager::am_flush_cmp_vector() {
+    companyAds.clear();
+}

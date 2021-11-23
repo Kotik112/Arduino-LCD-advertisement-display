@@ -164,6 +164,7 @@ int main(int argc, char** argv) {
         /* Flush file */
         else if (answer == 5) {
             flush_file();
+            am.am_flush_cmp_vector();
         }
         /* Exit */
         else if (answer == 6) {

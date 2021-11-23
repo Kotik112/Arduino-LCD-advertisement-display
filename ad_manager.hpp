@@ -28,9 +28,12 @@ public:
     void am_send_ad_to_serial();
     /* Reads file. */
     void am_read_file(const char* text);
+    /* Saves to file. */
     void am_save_file(const char* text);
     /* Returns the size of companyAds vector */
     int am_company_size();
+    /*  */
+    void am_flush_cmp_vector();
 };
 
 

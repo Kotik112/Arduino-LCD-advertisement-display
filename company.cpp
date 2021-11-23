@@ -15,7 +15,7 @@ string Company::encodeToSerial() {
 }
 
 
-bool Company::writeToFile()
+/* bool Company::writeToFile()
   {
     std::ofstream outputFile;
     outputFile.open("ads.txt", std::ios::app);
@@ -29,7 +29,7 @@ bool Company::writeToFile()
       std::cerr << "Could not open file to save \n";
       return false;
     }
-  }
+  } */
 
   void Company::printCompany() {
       std::cout << "Name: " << name << std::endl;
