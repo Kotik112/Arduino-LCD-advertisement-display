@@ -38,17 +38,10 @@ void print_menu(void) {
     cout << "#############################" << endl << endl;
 }
 
-string take_str_input(const char* text) {
-    char company[25];
-    cout << text << endl;
-    cin >> company;
-    return company;
-}
-
 void create_company(AdManager& am) {
-    string company = take_str_input("Enter company name: ");
-    string message = take_str_input("Enter message: ");
-    string bid = take_str_input("Enter your bid: ");
+    string company, message, bid;
+    //company = take_str_input(company);
+
     auto new_company = Company(company, message, bid);
     new_company.writeToFile();
     am.addCompany(new_company);
@@ -77,16 +70,14 @@ int main(int argc, char** argv) {
         }
     }
     auto am = AdManager(ports);
-    flush_file();
-
-
+    
     while(true) {
         int answer = 0;
         print_menu();
         cout << "Enter your choice: " << endl;
         cin >> answer;
 
-        //
+        /* Add advertisement. */
         if (answer == 1) {
             if(am.am_company_size() > 5) {
                 cerr << "Max 5 entries." << endl;
@@ -94,17 +85,28 @@ int main(int argc, char** argv) {
             }
             create_company(am);
         }
+        /* send to arduino. */
         else if (answer == 2) {
             am.am_send_ad_to_serial();
         }
+        /* Save to file. */
         else if (answer == 3) {
+            am.am_save_file("ads.txt");
+        }
+        /* Read from file. */
+        else if (answer == 4) {
             am.am_read_file("ads.txt");
         }
-        else if (answer == 4) {
+        /* Flush file */
+        else if (answer == 5) {
+            flush_file();
+        }
+        /* Exit */
+        else if (answer == 6) {
             exit(0);
         }
         else {
-            cerr << "Choices are 1 to 4." << endl;
+            cerr << "Choices are 1 to 6." << endl;
         }
     }
     
