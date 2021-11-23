@@ -93,6 +93,21 @@ vector<string> AdManager::splitString(string text, string delimiter) {
     return parts;
 }
 
+void AdManager::am_save_file(const char* text) {
+    for(auto company: companyAds) {
+        std::ofstream outputFile;
+        outputFile.open(text, std::ios::app);
+        if (outputFile.is_open()) {
+            std::cout << "OPENED FILE\n";
+            outputFile << company.name << "|" << company.message << "|" << company.bid<< "|" << std::endl;
+            outputFile.close();
+        }
+        else {
+            std::cerr << "Could not open file to save \n";
+        }
+    }
+}
+
 int AdManager::am_company_size() {
     int total = 0;
     for(auto company: companyAds) {

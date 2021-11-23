@@ -1,3 +1,0 @@
-foretaget|medklass|333|
-foretaget2|utanklass|66|
-harry|lego|77|
