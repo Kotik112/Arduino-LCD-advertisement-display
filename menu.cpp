@@ -15,6 +15,10 @@ using std::endl;
 using std::string;
 
 static bool inp_check(char ch) {
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 	return (ch >= 0x20 && ch <= 0x7a || ch == 0x0 || ch == 0x4);
 }
 
