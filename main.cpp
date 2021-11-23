@@ -17,6 +17,69 @@
 
 using namespace std;
 
+static bool inp_check(char ch) {
+	/* matar in en given text-strängs samtliga chars (bytes) genom en loop i samtliga input-funs
+	 * och om det inte är engelska engelska bokstäver, 0-9, underscores osv (ascii) så kommer false returneras.
+	 */
+	return (ch >= 0x20 && ch <= 0x7a || ch == 0x0 || ch == 0x4);
+}
+
+static string cmp_add_name(void) {
+	/* (company)-name input, om det inmatade inte är tillåtna tecken kontrollerat
+	 * i funktionen "inp_check" så så kastas funktionen tillbaka rekursivt för att
+	 * göras igen (korrekt). checkar också om längden är UNDER MAX_COMPANY_NAME.
+	 */
+    string name;
+	cout << "add company name: ";
+    cin >> name;
+	for (int i = 0; i < name.length(); i++) {
+        char ch = name[i];
+		if(!inp_check(ch)) {
+			cout << "you've entered an invalid character. try again" << endl;
+			return cmp_add_name();
+		} else if (name.length() > MAX_CMP_NAME){
+			cout << "max 20 characters. try again" << endl;
+			return cmp_add_name();
+		}
+	}
+    return name;
+}
+
+static string cmp_add_message(void) {
+
+    string message;
+	cout << "add company message: ";
+    cin >> message;
+	for (int i = 0; i < message.length(); i++) {
+        char ch = message[i];
+		if(!inp_check(ch)) {
+			cout << "you've entered an invalid character. try again" << endl;
+			return cmp_add_message();
+		} else if (message.length() > MAX_CMP_MESS) {
+			cout << "max 20 characters. try again" << endl;
+			return cmp_add_message();
+		}
+	}
+    return message;
+}
+
+static string cmp_add_bid(void) {
+    string bid;
+	cout << "add a bid: ";
+    cin >> bid;
+	for (int i = 0; i < bid.length(); i++) {
+        char ch = bid[i];
+		if(!inp_check(ch)) {
+			cout << "you've entered an invalid character. try again" << endl;
+			return cmp_add_name();
+		} else if (bid.length() > MAX_CMP_BID){
+			cout << "max 20 characters. try again" << endl;
+			return cmp_add_name();
+		}
+	}
+    return bid;
+}
+
 void flush_file() {
     std::ofstream ofs;
     ofs.open("ads.txt", std::ofstream::out | std::ofstream::trunc);
@@ -38,17 +101,11 @@ void print_menu(void) {
     cout << "#############################" << endl << endl;
 }
 
-string take_str_input(const char* text) {
-    char company[25];
-    cout << text << endl;
-    cin >> company;
-    return company;
-}
-
 void create_company(AdManager& am) {
-    string company = take_str_input("Enter company name: ");
-    string message = take_str_input("Enter message: ");
-    string bid = take_str_input("Enter your bid: ");
+    string company = cmp_add_name();
+    string message = cmp_add_message();
+    string bid = cmp_add_bid();
+    
     auto new_company = Company(company, message, bid);
     new_company.writeToFile();
     am.addCompany(new_company);

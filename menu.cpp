@@ -9,59 +9,79 @@
 #include "ad_manager.hpp"
 #include "menu.hpp"
 
-
-
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
 
+static bool inp_check(char ch) {
+	/* matar in en given text-strängs samtliga chars (bytes) genom en loop i samtliga input-funs
+	 * och om det inte är engelska engelska bokstäver, 0-9, underscores osv (ascii) så kommer false returneras.
+	 */
+	return (ch >= 0x20 && ch <= 0x7a || ch == 0x0 || ch == 0x4);
+}
+
+static string cmp_add_name(void) {
+	/* (company)-name input, om det inmatade inte är tillåtna tecken kontrollerat
+	 * i funktionen "inp_check" så så kastas funktionen tillbaka rekursivt för att
+	 * göras igen (korrekt). checkar också om längden är UNDER MAX_COMPANY_NAME.
+	 */
+    string name;
+	cout << "add company name: ";
+    cin >> name;
+	for (int i = 0; i < name.length(); i++) {
+		if(!inp_check(name) {
+			cout << "you've entered an invalid character. try again" << endl;
+			return cmp_add_name();
+		} else if (name.length() > MAX_CMP_NAME){
+			cout << "max 20 characters. try again" << endl;
+			return cmp_add_name();
+		}
+	}
+}
+
+static string cmp_add_message(void) {
+
+    string message;
+	cout << "add company message: ";
+    cin >> message;
+	for (int i = 0; i < message.length(); i++) {
+		if(!inp_check(message) {
+			cout << "you've entered an invalid character. try again" << endl;
+			return cmp_add_message();
+		} else if (message.length() > MAX_CMP_NAME){
+			cout << "max 20 characters. try again" << endl;
+			return cmp_add_message();
+		}
+	}
+    return message
+}
+
+static string cmp_add_bid(void) {
+    string bid;
+	cout << "add a bid: ";
+    cin >> bid;
+	for (int i = 0; i < bid.length(); i++) {
+		if (!inp_check(bid)) {
+			cout << "you've entered an invalid character. try again" << endl;
+			return cmp_add_name();
+		} else if (bid.length() > MAX_CMP_NAME){
+			cout << "max 20 characters. try again" << endl;
+			return cmp_add_name();
+		}
+	}
+    return bid;
+}
 
 Company get_company_input(void) {
  
-    string name = men_get_string_input("Enter company name: ");
-    string message = men_get_string_input("Enter company message: ");
-    int bid = men_get_int_input("Enter your bid for the advertisement: ");
+    string name = cmp_add_name();
+    string message = cmp_add_message();
+    string bid = cmp_add_bid();
 
     Company new_company = Company(name, message, bid);
     return new_company;
 }
-
-string men_get_string_input(const char* text) {
-
-    string io_get_string;
-    cout << text << endl;
-    cin.ignore();
-    getline(cin, io_get_string);
-    
-
-    if (io_get_string.length() < 1 || io_get_string.length() > 100 ) {
-        std::cerr << "Error " << endl;
-        return "";
-    }
-    
-    return io_get_string;
-    return 0;
-}
-
-int men_get_input(const char* text) {
-    
-    string io_get_int;
-     
-    cout << text << endl;
-    cin >> io_get_int;
-    if(io_get_int[0] == '-') {
-            std::cerr << "Invalid number entered." << endl;
-            return -1;
-        }
-    else {
-        int the_int = stoi(io_get_int);
-        return the_int;
-    }
-    return 0;
-}
-
-
 
 int men_entry_choice(const char* text) {
 
@@ -165,5 +185,3 @@ int men_entry(AdManager am) {
 
 
 }
-
-
