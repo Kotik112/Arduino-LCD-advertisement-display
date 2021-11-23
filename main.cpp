@@ -74,9 +74,9 @@ static string cmp_add_bid(void) {
     return bid;
 }
 
-void flush_file() {
+void flush_file(const char* text) {
     std::ofstream ofs;
-    ofs.open("ads.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.open(text, std::ofstream::out | std::ofstream::trunc);
     ofs.close();
 }
 
@@ -101,7 +101,6 @@ void create_company(AdManager& am) {
     string bid = cmp_add_bid();
     
     auto new_company = Company(company, message, bid);
-    new_company.writeToFile();
     am.addCompany(new_company);
 }
 
@@ -128,49 +127,74 @@ int main(int argc, char** argv) {
         }
     }
     auto am = AdManager(ports);
-    
-    while(true) {
-        int answer = 0;
-        print_menu();
-        cout << "Enter your choice: " << endl;
-        cin >> answer;
-
-        /* Add advertisement. */
-        if (answer == 1) {
+    int choice;
+    while(1){
+        switch (choice)
+        {
+        /* Add a new company to vector. */
+        case ADD:
             if(am.am_company_size() > 5) {
                 cerr << "Max 5 entries." << endl;
-                continue;
+                choice = ARDU; //Funkar?
             }
             create_company(am);
-        }
-        /* send to arduino. */
-        else if (answer == 2) {
+            break;
+
+        /* Send encoded struct to serial. */
+        case ARDU:
             am.am_send_ad_to_serial();
-        }
+            break;
         /* Save to file. */
-        else if (answer == 3) {
+        case SAVE:
             am.am_save_file("ads.txt");
-        }
+            break;
+
         /* Read from file. */
-        else if (answer == 4) {
+        case READ:
             am.am_read_file("ads.txt");
-        }
-        /* Flush file */
-        else if (answer == 5) {
-            flush_file();
+            break;
+
+        /* Flush file. */
+        case FLSH:
+            flush_file("ads.txt");
             am.am_flush_cmp_vector();
-        }
-        /* Exit */
-        else if (answer == 6) {
+            break;
+
+        /* Exit out of program. */
+        case EXIT:
             exit(0);
-        }
-        else {
-            cerr << "Choices are 1 to 6." << endl;
+            break;
+        
+        default:
+            break;
         }
     }
     
+
+/*
+ std::cout << "MAIN_MENU" << std::endl;
+    std::cout << "SELECT 1) ADD\t\t2) GET\t\t3) EXIT" << endl;
+    int staged = 0;
+    while(1) {
+        int choice = men_entry();
+        switch(choice) {
+            case SET:
+                cmp_manager(company);
+                /  in med vector, fyll medlemmarna /
+                std::cout << "\nyou've staged all companies. let's run the ads!" << endl;
+                break;
+            case RUN:
+                /  skicka in vector med medlemmar till exportlogik /
+                std::cout << "RUNNING THE SHOW" << endl;
+                pkt_export();
+                break;
+            case EXT:
+                / avsluta /
+                std::cout << "inne i EXT" << endl;
+                return 0;
+            default:
+                std::cout << "try again." << endl;
+        }
+    }
     return 0;
-}
-
-
-
+} */
