@@ -18,7 +18,6 @@ enum State { ADD, ARDU, SAVE, READ, FLSH, EXIT };
 class AdManager { 
     vector<Company> companyAds;
     vector<std::string> serialPorts;
-    int fullAdTime;
 
     vector<string> splitString(std::string text, std::string delimiter);
 public:

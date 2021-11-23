@@ -9,7 +9,6 @@
 using namespace std;
 
 AdManager::AdManager(vector<std::string> serialPorts): 
-fullAdTime(MAX_TIME), 
 serialPorts(serialPorts)
 {}
 
@@ -69,7 +68,6 @@ void AdManager::am_read_file(const char* text) {
         auto new_company = Company(company_name, message, bid);
         addCompany(new_company);
     }
-
 }
 
 vector<string> AdManager::splitString(string text, string delimiter) {
