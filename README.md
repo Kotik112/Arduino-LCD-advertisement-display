@@ -95,7 +95,6 @@ På godkäntnivå får man visa samma sak på alla Arduinos.
 
 - Slumpa budskapen så att alla Arduinos inte alltid visar samma sak.
 - Få texten att scrolla från höger till vänster på displayen.
-- Man skall kunna läsa in information om reklamköpare och deras budskap
-från en fil vid programstart. 
+- Man skall kunna läsa in information om reklamköpare och deras budskap från en fil vid programstart. 
 - Filen bör innehålla namn på företaget, vilket
 budskap de vill visa samt hur mycket de har betalat.
