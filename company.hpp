@@ -18,7 +18,6 @@ struct Company {
 
     //Encodes a 'Company' struct to a string
     string encodeToSerial();
-    void printCompany();
 };
 
 #endif

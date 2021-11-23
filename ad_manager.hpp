@@ -23,19 +23,24 @@ class AdManager {
 public:
     /* Constructor. */
     AdManager(vector<std::string> serialPorts);
+
     /* Adds a company to the companyAds vector. */
-    void addCompany(Company company);
+    void am_add_company(Company company);
+
     /* Connects to COM ports and sends the company ads through. */
     void am_send_ad_to_serial();
+
     /* Reads file. */
     void am_read_file(const char* text);
+
     /* Saves to file. */
     void am_save_file(const char* text);
+
     /* Returns the size of companyAds vector */
     int am_company_size();
-    /*  */
+
+    /* Clears the company_ads */
     void am_flush_cmp_vector();
 };
-
 
 #endif

@@ -121,7 +121,7 @@ void create_company(AdManager& am) {
     string bid = cmp_add_bid();
     
     auto new_company = Company(company, message, bid);
-    am.addCompany(new_company);
+    am.am_add_company(new_company);
 }
 
 int main(int argc, char** argv) {

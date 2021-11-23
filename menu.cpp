@@ -156,7 +156,7 @@ int men_entry(AdManager am) {
                     auto company = get_company_input();
                     company.printCompany(); //Kommentera bort det här sen.
                     company.writeToFile();
-                    am.addCompany(company);
+                    am.am_add_company(company);
                     ad_count++;
                 }
                 break;

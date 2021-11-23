@@ -12,7 +12,7 @@ AdManager::AdManager(vector<std::string> serialPorts):
 serialPorts(serialPorts)
 {}
 
-void AdManager::addCompany(Company company) {
+void AdManager::am_add_company(Company company) {
     this->companyAds.push_back(company);
 }
 
@@ -34,23 +34,19 @@ void AdManager::am_send_ad_to_serial() {
                 SerialWritePort(port, (char*) message.c_str(), message.length());
             }
             SerialClose(port);
-        }
-        else {
+        } else {
             std::cerr << "Not connected.\n";
         }
     }
-
-
 }
 
 
 void AdManager::am_read_file(const char* text) {
     // read file to stringsteam
-    std::stringstream ss, ss2;
+    std::stringstream ss;
     std::ifstream fp (text);
     if (fp.is_open()) {
-        ss << fp.rdbuf();
-        
+        ss << fp.rdbuf(); 
     }
     fp.close();
     std::cout << companyAds.size() << "\n";
@@ -62,11 +58,12 @@ void AdManager::am_read_file(const char* text) {
     // split to parts
     for (auto ad_text: lines) {
         auto ad_parts = splitString(ad_text, "|");
-        string company_name = ad_parts[0];
-        string message = ad_parts[1];
-        string bid = ad_parts[2];
+        auto company_name = ad_parts[0];
+        auto message = ad_parts[1];
+        auto bid = ad_parts[2];
         auto new_company = Company(company_name, message, bid);
-        addCompany(new_company);
+        //Adds (push_back) the company to its vector
+        am_add_company(new_company);
     }
 }
 
@@ -84,10 +81,6 @@ vector<string> AdManager::splitString(string text, string delimiter) {
         start = end + delimiter.length();
         //std::cout << "Next start pos is: " << start << std::endl;
     }
-    start = end + delimiter.length();
-    size_t length = text.length() - start;
-    parts.push_back(text.substr(start, length));
-
     return parts;
 }
 
