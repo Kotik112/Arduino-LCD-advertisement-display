@@ -42,7 +42,6 @@ static void stage_ads(package_t *cmp) {
   }
 }
 
-
 static void run_show(int mode) {
   if (mode == 1) {
     lcd.clear();
