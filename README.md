@@ -1,6 +1,48 @@
-# advertisement-on-arduino-lcd / Reklamskylt-arduino
+# Arduino advertisement LCD display / Arduino LCD reklamskylt
 
- Group project for "C/C++ Programmering"
+Disclaimer: This code has only been compiled and tested on Windows OS. 
+If you are running linux or any other system architecture, make sure to change makefile to "-o program.out".
+
+Compilation:
+A makefile is included in the repository. The output is a Windows executable. Just "make".
+Alternatively you can compile with the DOS command:
+	g++ -Wall main.cpp ad_manager.cpp company.cpp menu.cpp serial.c -o program.exe
+
+
+About the program:
+The program requires at least 1 arguement to run. This arguement is the COM port you are trying to connect to.
+For example: program.exe COM3 COM4
+where COM3 and COM4 are the respective COM to send data to.
+
+Main menu:
+
+#############################
+####### MAIN MENU ###########
+#                           #
+#    SELECT OPTION BELOW    #
+#   1. Add Adversistment    #
+#   2. Export Ads to Ardu   #
+#   3. Save to file         #
+#   4. Read from file       #
+#   5. Flush file           #
+#   6. Exit                 #
+#                           #
+#############################
+
+1 -> Will prompt you to add a new advertisement.
+2 -> Send advertisements to the COM specified at compile time.
+3 -> Saves all the advertisements to file.
+4 -> Reads advertisement from file.
+5 -> Flushes the saved file and wipes the saved ads from memory.
+6 -> Exits out of the program.
+
+//
+23/11-2021
+Jakob, Arman & Unn 
+
+
+
+# Group project for "C/C++ Programmering"
 
 1. Uppgift
 
@@ -20,7 +62,7 @@ Budskapen skall man kunna mata in i runtime i ert PC-program
     Ni får själva välja vettiga gränser (kortaste tiden något kan visas, längd på
 budskap osv).
 
-1.0.1 Kod för serieport:
+1. 0. 1. Kod för serieport:
 
 - Här finns ett lib för windows som användes i en tidigare omgång av kursen:
 https://gist.github.com/aspcodenet/f46069ec95c26a260ab7b9b10b4c95d4
@@ -31,7 +73,7 @@ https://blog.mbedded.ninja/programming/operating-systems/linux/linux-serialports
 
 2. Krav för godkänt
 
-2.1 Allmänna krav
+2. 1. Allmänna krav
 
 - Koden skall vara uppdelad i moduler (filer) på ett genomtänkt sätt.
 - Koden skall kompilera utan varningar med -Wall.
@@ -42,7 +84,7 @@ skall undvikas.
 - Minnet skall hanteras korrekt, minne man har fått av malloc/new skall frias
 med free/delete.
 
-2.2 Krav på lösningen
+2. 2. Krav på lösningen
 
 Man skall kunna ha mer än en Arduino samtidigt. 
 När man startar programmet skall man ge serieportarna som argument. 
