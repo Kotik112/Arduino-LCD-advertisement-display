@@ -18,21 +18,16 @@
 using namespace std;
 
 static bool inp_check(char ch) {
-	/* matar in en given text-strängs samtliga chars (bytes) genom en loop i samtliga input-funs
-	 * och om det inte är engelska engelska bokstäver, 0-9, underscores osv (ascii) så kommer false returneras.
-	 */
-	return (ch >= 0x20 && ch <= 0x7a || ch == 0x0 || ch == 0x4);
+	return ((ch >= 0x20 && ch <= 0x7a) || ch == 0x0 || ch == 0x4);
 }
-
+static bool int_check(char ch) {
+	return ch >= '0' && ch <= '9';
+}
 static string cmp_add_name(void) {
-	/* (company)-name input, om det inmatade inte är tillåtna tecken kontrollerat
-	 * i funktionen "inp_check" så så kastas funktionen tillbaka rekursivt för att
-	 * göras igen (korrekt). checkar också om längden är UNDER MAX_COMPANY_NAME.
-	 */
     string name;
-	cout << "add company name: ";
-    cin >> name;
-	for (int i = 0; i < name.length(); i++) {
+	std::cout << "add company name: ";
+    std::cin >> name;
+	for (unsigned int i = 0; i < name.length(); i++) {
         char ch = name[i];
 		if(!inp_check(ch)) {
 			cout << "you've entered an invalid character. try again" << endl;
@@ -46,11 +41,10 @@ static string cmp_add_name(void) {
 }
 
 static string cmp_add_message(void) {
-
     string message;
-	cout << "add company message: ";
-    cin >> message;
-	for (int i = 0; i < message.length(); i++) {
+	std::cout << "add message: ";
+    std::cin >> message;
+	for (unsigned int i = 0; i < message.length(); i++) {
         char ch = message[i];
 		if(!inp_check(ch)) {
 			cout << "you've entered an invalid character. try again" << endl;
@@ -65,15 +59,15 @@ static string cmp_add_message(void) {
 
 static string cmp_add_bid(void) {
     string bid;
-	cout << "add a bid: ";
-    cin >> bid;
-	for (int i = 0; i < bid.length(); i++) {
+	std::cout << "add a bid: ";
+    std::cin >> bid;
+	for (unsigned int i = 0; i < bid.length(); i++) {
         char ch = bid[i];
-		if(!inp_check(ch)) {
-			cout << "you've entered an invalid character. try again" << endl;
+		if(!int_check(ch)) {
+			cout << "you've not entered a digit. try again." << endl;
 			return cmp_add_name();
 		} else if (bid.length() > MAX_CMP_BID){
-			cout << "max 20 characters. try again" << endl;
+			cout << "to large number, try again" << endl;
 			return cmp_add_name();
 		}
 	}
