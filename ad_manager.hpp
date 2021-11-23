@@ -7,6 +7,9 @@
 #include "company.hpp"
 
 #define MAX_TIME 60
+#define MAX_CMP_NAME 20
+#define MAX_CMP_MESS 50
+#define MAX_CMP_BID 10
 
 using std::vector;
 
