@@ -36,7 +36,7 @@ Jakob, Arman & Unn
 
 
 
-# Group project for "C/C++ Programmering"
+# Group project for "C/C++ Programmming"
 
 1. Uppgift
 
