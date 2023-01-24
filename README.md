@@ -16,12 +16,12 @@ where COM3 and COM4 are the respective COM to send data to.
 
 Main menu:
 
-#   1. Add Adversistment    #
-#   2. Export Ads to Ardu   #
-#   3. Save to file         #
-#   4. Read from file       #
-#   5. Flush file           #
-#   6. Exit                 #
+###   1. Add Adversistment    #
+###   2. Export Ads to Ardu   #
+###   3. Save to file         #
+###   4. Read from file       #
+###   5. Flush file           #
+###   6. Exit                 #
 
 1 -> Will prompt you to add a new advertisement.
 2 -> Send advertisements to the COM specified at compile time.
